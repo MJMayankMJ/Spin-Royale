@@ -1,7 +1,9 @@
 # Spin Royale
 
-Spin Royale is an iOS slot machine app built with UIKit and Core Data. It offers daily rewards, engaging spin animations, and immersive sound effects for a realistic casino experience.
 ![SpinRoyale 2](https://github.com/user-attachments/assets/be730957-463c-4a32-abb3-6f898da4f219)
+
+Spin Royale is an iOS slot machine app built with UIKit and Core Data. It offers daily rewards, engaging spin animations, and immersive sound effects for a realistic casino experience.
+
 
 ## Features
 
