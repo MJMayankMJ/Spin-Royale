@@ -33,7 +33,6 @@ class DragonViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
         // Fade-in animation for the collection view.
         collectionView.alpha = 0
         UIView.animate(withDuration: 0.5) {
@@ -49,9 +48,12 @@ class DragonViewController: UIViewController {
             return
         }
         print("Bet pressed: \(betValue). Starting game...")
-        // Set the bet and deduct coins.
         viewModel.betAmount = betValue
         viewModel.coinBalance -= betValue
+        
+        // Start the game by generating the full board and highlighting the bottom row.
+        viewModel.startGame()
+        collectionView.reloadData()
     }
 }
 
@@ -74,58 +76,99 @@ extension DragonViewController: UICollectionViewDataSource {
 // MARK: - UICollectionViewDelegate
 extension DragonViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // Determine which row the tapped cell is in.
+        // Determine which row the tapped cell belongs to.
         let row = indexPath.item / viewModel.totalColumns
         
-        // Process tap only if it is in the active (highlighted) row.
-        if row == viewModel.activeRow, let outcome = viewModel.currentRowOutcome {
+        // Allow tap only if it's the active (highlighted) row.
+        if row == viewModel.activeRow {
             let col = indexPath.item % viewModel.totalColumns
+            let outcome = viewModel.board[row][col]
             
-            // Check the predetermined outcome for the tapped cell.
-            if outcome[col] == .skull {
-                // Skull tapped: set multiplier to 0 and end the game.
+            if outcome == .skull {
+                // Skull tapped: reveal entire board and mark game over.
+                viewModel.revealEntireBoard()
                 viewModel.currentMultiplier = 0.0
                 viewModel.gameOver = true
+                
+                UIView.transition(with: collectionView,
+                                  duration: 0.5,
+                                  options: .transitionCrossDissolve,
+                                  animations: {
+                    self.collectionView.reloadData()
+                }, completion: { _ in
+                    self.showGameOverAlert()
+                })
             } else {
-                // Egg tapped: update multiplier for this row.
-                let multiplierIndex = (viewModel.totalRows - 1) - viewModel.activeRow  // bottom row = index 0.
-                let rowMultiplier = viewModel.multipliers[multiplierIndex]
-                viewModel.currentMultiplier *= rowMultiplier
-            }
-            
-            // Animate the reveal of the active row.
-            UIView.transition(with: collectionView,
-                              duration: 0.5,
-                              options: .transitionCrossDissolve,
-                              animations: {
-                self.viewModel.revealActiveRow()
-                self.collectionView.reloadData()
-            }, completion: { _ in
-                // If game is over, show the final result alert.
-                if self.viewModel.gameOver {
-                    let bet = self.viewModel.betAmount
-                    let finalAmt = self.viewModel.finalAmount(forBet: bet)
-                    let netGain = self.viewModel.netGain(forBet: bet)
-                    
-                    let message = "Bet: \(bet)\nFinal Amount: \(Int(finalAmt))\nNet Gain: \(Int(netGain))"
-                    let alert = UIAlertController(title: "Game Over", message: message, preferredStyle: .alert)
-                    
-                    // "OK" simply dismisses the alert.
-                    let okAction = UIAlertAction(title: "OK", style: .default) { _ in
-                        // Dismiss alert; user can enter a new bet.
-                    }
-                    // "Replay" resets the game with the same bet.
-                    let replayAction = UIAlertAction(title: "Replay", style: .default) { _ in
-                        self.viewModel.resetGame()
+                // Egg tapped: reveal this row.
+                viewModel.revealRow(row)
+                
+                UIView.transition(with: collectionView,
+                                  duration: 0.5,
+                                  options: .transitionCrossDissolve,
+                                  animations: {
+                    self.collectionView.reloadData()
+                }, completion: { _ in
+                    // Move active row up.
+                    self.viewModel.activeRow -= 1
+                    if self.viewModel.activeRow >= 0 {
+                        // Highlight the next row.
+                        self.viewModel.highlightRow(self.viewModel.activeRow)
                         self.collectionView.reloadData()
+                    } else {
+                        // No more rows: game complete.
+                        self.viewModel.gameOver = true
+                        self.showGameOverAlert()
                     }
-                    
-                    alert.addAction(okAction)
-                    alert.addAction(replayAction)
-                    self.present(alert, animated: true, completion: nil)
-                }
-            })
+                })
+            }
         }
+    }
+}
+//extension DragonViewController: UICollectionViewDelegate {
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        // testing
+//        print("ddone")
+//        for i in 0..<viewModel.cells.count {
+//            viewModel.cells[i].state = .skull
+//        }
+//        
+//        UIView.transition(with: collectionView,
+//                          duration: 0.5,
+//                          options: .transitionCrossDissolve,
+//                          animations: {
+//            self.collectionView.reloadData()
+//        }, completion: nil)
+//    }
+//}
+
+
+// MARK: - Game Over Alert
+extension DragonViewController {
+    private func showGameOverAlert() {
+        let bet = viewModel.betAmount
+        let finalAmt = viewModel.finalAmount(forBet: bet)
+        let netGain = viewModel.netGain(forBet: bet)
+        
+        let message = "Bet: \(bet)\nFinal Amount: \(Int(finalAmt))\nNet Gain: \(Int(netGain))"
+        let alert = UIAlertController(title: "Game Over", message: message, preferredStyle: .alert)
+        
+        // "OK" resets the game completely (user must enter a new bet).
+        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+            // Reset game state (for a fresh start).
+            self.viewModel.resetGame()
+            self.betTextField.text = ""
+            self.collectionView.reloadData()
+        }
+        
+        // "Replay" resets the game with the same bet amount.
+        let replayAction = UIAlertAction(title: "Replay", style: .default) { _ in
+            self.viewModel.resetGame()
+            self.collectionView.reloadData()
+        }
+        
+        alert.addAction(okAction)
+        alert.addAction(replayAction)
+        present(alert, animated: true, completion: nil)
     }
 }
 

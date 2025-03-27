@@ -39,13 +39,17 @@ class EggCell: UICollectionViewCell {
             
         case .egg:
             tileImageView.image = UIImage(named: K.darkTile)
-            centerImageView.image = UIImage(named: K.eggPNG)       // Egg image asset
             centerImageView.isHidden = false
+            centerImageView.image = UIImage(named: K.eggPNG)       // Egg image asset
+            
+            //tileImageView.isHidden = true
             
         case .skull:
             tileImageView.image = UIImage(named: K.darkTile)
-            centerImageView.image = UIImage(named: K.skullPNG)     // Skull image asset
             centerImageView.isHidden = false
+            centerImageView.image = UIImage(named: K.skullPNG)     // Skull image asset
+            
+            //tileImageView.isHidden = true
         }
     }
 }
