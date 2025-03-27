@@ -9,7 +9,7 @@ import UIKit
 
 class SlotViewController: UIViewController {
     
-    // MARK: - IBOutlets (connected from Storyboard)
+    // MARK: - IBOutlets
     @IBOutlet weak var labelResult: UILabel!
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var buttonSpin: UIButton!
@@ -28,6 +28,7 @@ class SlotViewController: UIViewController {
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         pickerView.delegate = self
         pickerView.dataSource = self
         
@@ -45,6 +46,7 @@ class SlotViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        // Fade in the spin button
         UIView.animate(withDuration: 0.5,
                        delay: 0.3,
                        options: .curveEaseOut,
@@ -114,18 +116,24 @@ class SlotViewController: UIViewController {
     }
     
     func animateButton() {
-        let shrinkSize = CGRect(x: bounds.origin.x,
-                                y: bounds.origin.y,
-                                width: bounds.size.width - 15,
-                                height: bounds.size.height)
+        let shrinkSize = CGRect(
+            x: bounds.origin.x,
+            y: bounds.origin.y,
+            width: bounds.size.width - 15,
+            height: bounds.size.height
+        )
         
-        UIView.animate(withDuration: 0.5,
-                       delay: 0.0,
-                       usingSpringWithDamping: 0.1,
-                       initialSpringVelocity: 5,
-                       options: .curveLinear,
-                       animations: { self.buttonSpin.bounds = shrinkSize },
-                       completion: nil)
+        UIView.animate(
+            withDuration: 0.5,
+            delay: 0.0,
+            usingSpringWithDamping: 0.1,
+            initialSpringVelocity: 5,
+            options: .curveLinear,
+            animations: {
+                self.buttonSpin.bounds = shrinkSize
+            },
+            completion: nil
+        )
     }
 }
 
@@ -153,12 +161,19 @@ extension SlotViewController: UIPickerViewDelegate, UIPickerViewDataSource {
                     forComponent component: Int,
                     reusing view: UIView?) -> UIView {
         
-        let pickerLabel = UILabel()
-        pickerLabel.textAlignment = .center
-        pickerLabel.font = UIFont(name: K.emojiFont, size: 75)
+        // Create a label for the picker row
+        let pickerLabel: UILabel
+        if let reusedLabel = view as? UILabel {
+            pickerLabel = reusedLabel
+        } else {
+            pickerLabel = UILabel()
+            pickerLabel.textAlignment = .center
+            pickerLabel.font = UIFont(name: K.emojiFont, size: 75)
+        }
         
-        // Use view model’s data to set the emoji
-        pickerLabel.text = K.imageArray[viewModel.dataArray[component][row]]
+        // Use the index from viewModel's data to pick the correct emoji from K.imageArray
+        let symbolIndex = viewModel.dataArray[component][row]
+        pickerLabel.text = K.imageArray[symbolIndex]
         
         return pickerLabel
     }

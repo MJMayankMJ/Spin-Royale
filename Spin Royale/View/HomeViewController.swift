@@ -20,6 +20,7 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //KeychainHelper.shared.resetKeychain() //......
         
         // Set up a closure to update the UI when the view model changes.
         viewModel.onUpdate = { [weak self] in

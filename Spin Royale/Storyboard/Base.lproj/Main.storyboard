@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="joe-HY-7SG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NnK-uy-zKk">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
@@ -16,32 +16,47 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="FD6-7L-9hy">
-                                <rect key="frame" x="0.0" y="-7" width="414" height="903"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="FD6-7L-9hy">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="iWj-C6-ANN">
-                                <rect key="frame" x="40" y="40" width="334" height="826"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="dlt-nf-hjn" userLabel="a">
+                                <rect key="frame" x="0.0" y="25" width="414" height="842.5"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Spin the wheel" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="woq-Cu-JiA">
-                                        <rect key="frame" x="0.0" y="0.0" width="334" height="80"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="80" id="sgx-YX-ty1"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="35"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <pickerView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KiU-iK-Vxd" customClass="Slo">
-                                        <rect key="frame" x="0.0" y="100" width="334" height="626"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="KiU-iK-Vxd" secondAttribute="height" multiplier="200:300" priority="750" id="B1c-dR-M5Z"/>
-                                        </constraints>
-                                    </pickerView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="iWj-C6-ANN" userLabel="b">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="771"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Spin the wheel" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="woq-Cu-JiA">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="80" id="sgx-YX-ty1"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="35"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J1q-Hf-Utj" userLabel="spin">
+                                                <rect key="frame" x="0.0" y="83" width="414" height="688"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="spin" translatesAutoresizingMaskIntoConstraints="NO" id="jag-rr-48A">
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="626"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    </imageView>
+                                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QSV-eO-tit">
+                                                        <rect key="frame" x="49" y="214" width="299" height="126"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="QSV-eO-tit" secondAttribute="height" multiplier="299:126" id="yc6-bA-ofj"/>
+                                                        </constraints>
+                                                    </pickerView>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="QSV-eO-tit" secondAttribute="trailing" constant="66" id="C8N-6y-8Ni"/>
+                                                    <constraint firstItem="QSV-eO-tit" firstAttribute="leading" secondItem="J1q-Hf-Utj" secondAttribute="leading" constant="49" id="h6h-OR-zOJ"/>
+                                                    <constraint firstItem="QSV-eO-tit" firstAttribute="top" secondItem="J1q-Hf-Utj" secondAttribute="top" constant="214" id="tat-6d-fey"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uT0-Wd-pY0">
-                                        <rect key="frame" x="0.0" y="746" width="334" height="80"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="80" id="4C0-eE-W2F"/>
-                                        </constraints>
+                                        <rect key="frame" x="0.0" y="779" width="414" height="63.5"/>
                                         <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="39"/>
                                         <state key="normal" title="SPIN">
                                             <color key="titleColor" systemColor="labelColor"/>
@@ -61,22 +76,94 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="iWj-C6-ANN" secondAttribute="bottom" constant="20" id="Ebb-qd-BXI"/>
-                            <constraint firstItem="iWj-C6-ANN" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="40" id="UKQ-XO-7xr"/>
-                            <constraint firstAttribute="trailing" secondItem="iWj-C6-ANN" secondAttribute="trailing" constant="40" id="iIC-E2-5WF"/>
-                            <constraint firstItem="iWj-C6-ANN" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="wK6-pu-BEU"/>
+                            <constraint firstItem="dlt-nf-hjn" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="80g-Lx-hi1"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="dlt-nf-hjn" secondAttribute="bottom" constant="18.5" id="9Fu-Sk-znS"/>
+                            <constraint firstItem="FD6-7L-9hy" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="P63-8y-rIx"/>
+                            <constraint firstAttribute="trailing" secondItem="dlt-nf-hjn" secondAttribute="trailing" id="SYY-9O-0oE"/>
+                            <constraint firstItem="FD6-7L-9hy" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="T3d-m6-t0Q"/>
+                            <constraint firstItem="FD6-7L-9hy" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="eY9-5Z-WS0"/>
+                            <constraint firstItem="FD6-7L-9hy" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="pKZ-dd-h5A"/>
+                            <constraint firstItem="dlt-nf-hjn" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="25" id="s24-UL-03q"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="XIJ-4D-emu"/>
                     <connections>
                         <outlet property="buttonSpin" destination="uT0-Wd-pY0" id="D0s-zm-Dj6"/>
                         <outlet property="labelResult" destination="woq-Cu-JiA" id="3MV-CH-fc7"/>
-                        <outlet property="pickerView" destination="KiU-iK-Vxd" id="d2K-sj-gif"/>
+                        <outlet property="pickerView" destination="QSV-eO-tit" id="gOs-KU-BHv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="88" y="155"/>
+            <point key="canvasLocation" x="19" y="678"/>
+        </scene>
+        <!--Dragon View Controller-->
+        <scene sceneID="fc2-Dv-dLu">
+            <objects>
+                <viewController id="NnK-uy-zKk" customClass="DragonViewController" customModule="Spin_Royale" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5D0-in-HZ7">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="Ebo-Xo-Z8z">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="c4E-eW-aKz">
+                                <rect key="frame" x="20" y="88" width="374" height="679.5"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Lpd-Gn-xh4">
+                                    <size key="itemSize" width="129" height="76"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="8XF-DH-dt2">
+                                <rect key="frame" x="40" y="807.5" width="334" height="34.5"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7Yn-sK-Up7">
+                                        <rect key="frame" x="0.0" y="0.0" width="184" height="34.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="azc-9b-dVz">
+                                        <rect key="frame" x="284" y="0.0" width="50" height="34.5"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Bet">
+                                            <color key="baseBackgroundColor" systemColor="systemIndigoColor"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="betButtonTapped:" destination="NnK-uy-zKk" eventType="touchUpInside" id="jf8-kB-Uhv"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="kq0-it-o4J"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="kq0-it-o4J" firstAttribute="trailing" secondItem="8XF-DH-dt2" secondAttribute="trailing" constant="40" id="2X0-UD-L0X"/>
+                            <constraint firstItem="c4E-eW-aKz" firstAttribute="top" secondItem="kq0-it-o4J" secondAttribute="top" constant="40" id="50F-nk-vjr"/>
+                            <constraint firstItem="c4E-eW-aKz" firstAttribute="leading" secondItem="kq0-it-o4J" secondAttribute="leading" constant="20" id="Ia2-0O-ywv"/>
+                            <constraint firstItem="Ebo-Xo-Z8z" firstAttribute="leading" secondItem="kq0-it-o4J" secondAttribute="leading" id="RXr-p4-BLO"/>
+                            <constraint firstItem="kq0-it-o4J" firstAttribute="bottom" secondItem="8XF-DH-dt2" secondAttribute="bottom" constant="20" id="TOs-hv-mxI"/>
+                            <constraint firstItem="Ebo-Xo-Z8z" firstAttribute="top" secondItem="5D0-in-HZ7" secondAttribute="top" id="Tqv-eo-Djg"/>
+                            <constraint firstAttribute="bottom" secondItem="Ebo-Xo-Z8z" secondAttribute="bottom" id="eU1-EG-5es"/>
+                            <constraint firstItem="kq0-it-o4J" firstAttribute="trailing" secondItem="c4E-eW-aKz" secondAttribute="trailing" constant="20" id="lDb-Z5-Syl"/>
+                            <constraint firstItem="Ebo-Xo-Z8z" firstAttribute="trailing" secondItem="kq0-it-o4J" secondAttribute="trailing" id="xUS-tP-jDY"/>
+                            <constraint firstItem="8XF-DH-dt2" firstAttribute="top" secondItem="c4E-eW-aKz" secondAttribute="bottom" constant="40" id="xr6-dX-1lo"/>
+                            <constraint firstItem="8XF-DH-dt2" firstAttribute="leading" secondItem="kq0-it-o4J" secondAttribute="leading" constant="40" id="zjJ-77-0Ms"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="betButton" destination="azc-9b-dVz" id="cMb-Uk-ueY"/>
+                        <outlet property="betTextField" destination="7Yn-sK-Up7" id="fif-pw-lTJ"/>
+                        <outlet property="collectionView" destination="c4E-eW-aKz" id="nbn-fD-OGP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E99-ee-dKO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="18.840579710144929" y="-78.348214285714278"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="seK-UL-6EW">
@@ -212,6 +299,7 @@
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h5s-Di-lu7">
                                                             <rect key="frame" x="193" y="0.0" width="50" height="50"/>
                                                             <constraints>
+                                                                <constraint firstAttribute="width" secondItem="h5s-Di-lu7" secondAttribute="height" multiplier="1:1" id="FUV-be-SjT"/>
                                                                 <constraint firstAttribute="width" secondItem="h5s-Di-lu7" secondAttribute="height" multiplier="1:1" id="nSl-lA-Cms"/>
                                                             </constraints>
                                                             <state key="normal" title="Button"/>
@@ -224,7 +312,6 @@
                                                         </button>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="h5s-Di-lu7" firstAttribute="width" secondItem="h5s-Di-lu7" secondAttribute="height" multiplier="1:1" id="FUV-be-SjT"/>
                                                         <constraint firstItem="Au7-vl-yco" firstAttribute="top" secondItem="Ika-Tw-2cG" secondAttribute="top" constant="13" id="gZN-Ff-xq8"/>
                                                     </constraints>
                                                 </stackView>
@@ -292,6 +379,7 @@
         <image name="background" width="5556" height="5556"/>
         <image name="bitcoinsign.circle.fill" catalog="system" width="128" height="123"/>
         <image name="circle.fill" catalog="system" width="128" height="123"/>
+        <image name="spin" width="500" height="500"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
@@ -299,10 +387,10 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemIndigoColor">
-            <color red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemYellowColor">
             <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

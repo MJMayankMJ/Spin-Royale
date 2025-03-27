@@ -17,4 +17,10 @@ enum K {
     static let imageArray = ["🍋", "❤️", "🍒", "⓻"]
     static let rattle     = "Rattle"
     static let homeToSlotVC = "showSlotVC"
+    
+    
+    static let lightTile = "lightTile"
+    static let darkTile = "tileBackground"
+    static let skullPNG = "skull"
+    static let eggPNG = "egg"
 }
