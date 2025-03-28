@@ -60,6 +60,7 @@ class DragonViewModel {
             let skullIndex = Int.random(in: 0..<totalColumns)
             row[skullIndex] = .skull
             board.append(row)
+            print("DEBUG: Row \(row): skull at column \(skullIndex)") // for testing
         }
     }
     

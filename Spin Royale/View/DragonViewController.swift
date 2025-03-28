@@ -9,6 +9,8 @@ import UIKit
 
 class DragonViewController: UIViewController {
     
+    var coinTotalLabel: UILabel!
+    
     // MARK: - IBOutlets
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var betTextField: UITextField!
@@ -32,7 +34,16 @@ class DragonViewController: UIViewController {
         
         // Initially, the button title is "Bet"
         betButton.setTitle("Bet", for: .normal)
+        
+        setupNavigationCoinDisplay()
+        // coin change
+        NotificationCenter.default.addObserver(self, selector: #selector(coinsDidChange), name: CoinsManager.coinsDidChangeNotification, object: nil)
     }
+    
+    deinit {
+            // remove observer when view controller is deallocated ....
+            NotificationCenter.default.removeObserver(self, name: CoinsManager.coinsDidChangeNotification, object: nil)
+        }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -42,6 +53,14 @@ class DragonViewController: UIViewController {
             self.collectionView.alpha = 1
         }
     }
+    
+    // not needed .... but why not
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // Update the coin label with current coin balance from the shared CoinsManager
+        coinTotalLabel.text = "\(CoinsManager.shared.userStats?.totalCoins ?? 0)"
+    }
+
     
     // MARK: - IBActions
     @IBAction func betButtonTapped(_ sender: UIButton) {
@@ -170,53 +189,124 @@ extension DragonViewController: UICollectionViewDelegate {
 
 // MARK: - Game Over Alert
 extension DragonViewController {
-    /// Presents a game-over alert.
-    /// - Parameters:
-    ///   - isCashOut: True if this ended by cashing out.
-    ///   - finalAmt: Final winning amount.
-    ///   - netGain: Net gain (finalAmt - bet).
+    // - Parameters:
+    //   - isCashOut: True if this ended by cashing out.
+    //   - finalAmt: Final winning amount.
+    //   - netGain: Net gain (finalAmt - bet).
     private func showGameOverAlert(isCashOut: Bool, finalAmt: Double, netGain: Double) {
         let bet = viewModel.betAmount
         let titleText = isCashOut ? "Cashed Out" : "Game Over"
         let message = "Bet: \(bet)\nFinal Amount: \(Int(finalAmt))\nNet Gain: \(Int(netGain))"
+        
         let alert = UIAlertController(title: titleText, message: message, preferredStyle: .alert)
         
-        // "OK" resets the game and, if applicable, adds winnings.
-        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+        let homeAction = UIAlertAction(title: "Home", style: .default) { _ in
+            // If the multiplier > 1.0, add winnings
             if self.viewModel.currentMultiplier > 1.0 {
-                // Add winnings via CoinsManager.
                 CoinsManager.shared.addCoins(amount: Int64(finalAmt)) { result in
                     DispatchQueue.main.async {
                         switch result {
                         case .success():
                             print("Winnings added successfully.")
                         case .failure(let error):
-                            let errorAlert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                            let errorAlert = UIAlertController(
+                                title: "Error",
+                                message: error.localizedDescription,
+                                preferredStyle: .alert
+                            )
                             errorAlert.addAction(UIAlertAction(title: "OK", style: .default))
                             self.present(errorAlert, animated: true)
                         }
                     }
                 }
             }
-            // Reset game state and update button title back to "Bet".
+            // Reset the game state
             self.viewModel.resetGame()
             self.betTextField.text = ""
             self.betButton.setTitle("Bet", for: .normal)
             self.collectionView.reloadData()
+            
+            self.navigationController?.popViewController(animated: true)
         }
         
-        // "Replay" simply resets the game with the same bet amount.
+        //update coins if winnings exist, then reset game and continue.
+//        let replayAction = UIAlertAction(title: "Replay", style: .default) { _ in
+//            if self.viewModel.currentMultiplier > 1.0 {
+//                CoinsManager.shared.addCoins(amount: Int64(finalAmt)) { result in
+//                    DispatchQueue.main.async {
+//                        switch result {
+//                        case .success():
+//                            print("Winnings added successfully on replay.")
+//                        case .failure(let error):
+//                            let errorAlert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+//                            errorAlert.addAction(UIAlertAction(title: "OK", style: .default))
+//                            self.present(errorAlert, animated: true)
+//                        }
+//                        self.viewModel.resetGame()
+//                        self.betButton.setTitle("Bet", for: .normal)
+//                        self.collectionView.reloadData()
+//                    }
+//                }
+//            } else {
+//                self.viewModel.resetGame()
+//                self.betButton.setTitle("Bet", for: .normal)
+//                self.collectionView.reloadData()
+//            }
+//        }
+        // "Replay" action: deduct the bet amount again, then reset the game.
+//        let replayAction = UIAlertAction(title: "Replay", style: .default) { _ in
+//            CoinsManager.shared.deductCoins(amount: Int64(self.viewModel.betAmount)) { result in
+//                DispatchQueue.main.async {
+//                    switch result {
+//                    case .success():
+//                        print("Bet deducted for replay.")
+//                    case .failure(let error):
+//                        let errorAlert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+//                        errorAlert.addAction(UIAlertAction(title: "OK", style: .default))
+//                        self.present(errorAlert, animated: true)
+//                    }
+//                    // Reset the game state and update UI.
+//                    self.viewModel.resetGame()
+//                    self.betButton.setTitle("Bet", for: .normal)
+//                    self.collectionView.reloadData()
+//                }
+//            }
+//        }
+
+        // "Replay" action: deduct the bet amount again and add winnings if applicable, then reset the game.
         let replayAction = UIAlertAction(title: "Replay", style: .default) { _ in
-            self.viewModel.resetGame()
-            self.betButton.setTitle("Bet", for: .normal)
-            self.collectionView.reloadData()
+            let bet = self.viewModel.betAmount
+            let finalAmt = self.viewModel.finalAmount(forBet: bet)
+            
+            // If the game was won, add winnings.
+            if self.viewModel.currentMultiplier > 1.0 {
+                CoinsManager.shared.addCoins(amount: Int64(finalAmt)) { result in
+                    DispatchQueue.main.async {
+                        switch result {
+                        case .success():
+                            print("Winnings added successfully on replay.")
+                        case .failure(let error):
+                            let errorAlert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                            errorAlert.addAction(UIAlertAction(title: "OK", style: .default))
+                            self.present(errorAlert, animated: true)
+                        }
+                        // Regardless of success, deduct the bet amount for the new game.
+                        self.deductBetForReplay(bet: bet)
+                    }
+                }
+            } else {
+                // If no winnings, just deduct the bet.
+                self.deductBetForReplay(bet: bet)
+            }
         }
+
         
-        alert.addAction(okAction)
+        alert.addAction(homeAction)
         alert.addAction(replayAction)
         self.present(alert, animated: true)
     }
 }
+
 
 // MARK: - UICollectionViewDelegateFlowLayout
 extension DragonViewController: UICollectionViewDelegateFlowLayout {
@@ -252,4 +342,60 @@ extension DragonViewController: UICollectionViewDelegateFlowLayout {
                         minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return cellSpacing
     }
+}
+
+extension DragonViewController{
+    func setupNavigationCoinDisplay() {
+        let containerWidth: CGFloat = 100
+        let containerHeight: CGFloat = 30
+        let container = UIView(frame: CGRect(x: 0, y: 0, width: containerWidth, height: containerHeight))
+        
+        let coinImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
+        
+        let symbolConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .regular, scale: .medium)
+        let symbolImage = UIImage(systemName: "circle.fill", withConfiguration: symbolConfig)
+        
+        coinImageView.image = symbolImage
+        coinImageView.tintColor = .systemYellow
+        coinImageView.contentMode = .scaleAspectFit
+        
+        container.addSubview(coinImageView)
+        
+        coinTotalLabel = UILabel(frame: CGRect(x: 30, y: 0, width: containerWidth - 30, height: containerHeight))
+        coinTotalLabel.text = "\(CoinsManager.shared.userStats?.totalCoins ?? 0)"
+        coinTotalLabel.font = UIFont.systemFont(ofSize: 16)
+        coinTotalLabel.textColor = .black
+        coinTotalLabel.textAlignment = .left
+        container.addSubview(coinTotalLabel)
+        
+        let coinBarButtonItem = UIBarButtonItem(customView: container)
+        navigationItem.rightBarButtonItem = coinBarButtonItem
+    }
+
+    
+    @objc func coinsDidChange() {
+            // Update the coin label whenever coins are changed.
+            coinTotalLabel.text = "\(CoinsManager.shared.userStats?.totalCoins ?? 0)"
+        }
+    
+    //.... i know i could gave dome somthing better .... but im stupid
+    private func deductBetForReplay(bet: Int) {
+        CoinsManager.shared.deductCoins(amount: Int64(bet)) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success():
+                    print("Bet deducted for replay.")
+                case .failure(let error):
+                    let errorAlert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                    errorAlert.addAction(UIAlertAction(title: "OK", style: .default))
+                    self.present(errorAlert, animated: true)
+                }
+                // Reset the game state and update UI.
+                self.viewModel.resetGame()
+                self.betButton.setTitle("Bet", for: .normal)
+                self.collectionView.reloadData()
+            }
+        }
+    }
+
 }

@@ -11,10 +11,12 @@ import CoreData
 class CoinsManager {
     static let shared = CoinsManager()
     
-    // Fetch the current UserStats from Core Data.
     var userStats: UserStats? {
         return CoreDataManager.shared.fetchUserStats()
     }
+    
+    // Notification name for coin changes.
+    static let coinsDidChangeNotification = Notification.Name("CoinsDidChangeNotification")
     
     func deductCoins(amount: Int64, completion: @escaping (Result<Void, Error>) -> Void) {
         guard let stats = userStats else {
@@ -24,9 +26,10 @@ class CoinsManager {
         }
         stats.totalCoins -= amount
         CoreDataManager.shared.saveContext()
+        // Notify listeners that coins have changed.
+        NotificationCenter.default.post(name: CoinsManager.coinsDidChangeNotification, object: nil)
         completion(.success(()))
     }
-    
     
     func addCoins(amount: Int64, completion: @escaping (Result<Void, Error>) -> Void) {
         guard let stats = userStats else {
@@ -36,6 +39,8 @@ class CoinsManager {
         }
         stats.totalCoins += amount
         CoreDataManager.shared.saveContext()
+        // Notify listeners that coins have changed.
+        NotificationCenter.default.post(name: CoinsManager.coinsDidChangeNotification, object: nil)
         completion(.success(()))
     }
 }
