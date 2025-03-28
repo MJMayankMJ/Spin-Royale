@@ -74,7 +74,7 @@ class HomeViewController: UIViewController {
                slotVC.presentationController?.delegate = self
            }
         if segue.identifier == K.segueToDragonVC,
-           let slotVC = segue.destination as? DragonViewController {
+           let _ = segue.destination as? DragonViewController {
 //            slotVC.userStats = self.viewModel.userStats
         }
        }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ey3-K1-7wU">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina6_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -8,108 +8,104 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Slot View Controller-->
+        <!--Spin the wheel-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="SlotViewController" customModule="Spin_Royale" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="440" height="956"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="FD6-7L-9hy">
-                                <rect key="frame" x="0.0" y="92" width="414" height="770"/>
+                                <rect key="frame" x="0.0" y="0.0" width="440" height="956"/>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="dlt-nf-hjn" userLabel="a">
-                                <rect key="frame" x="0.0" y="25" width="414" height="818.5"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uT0-Wd-pY0">
+                                <rect key="frame" x="0.0" y="858.66666666666663" width="440" height="63.333333333333371"/>
+                                <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="39"/>
+                                <state key="normal" title="SPIN">
+                                    <color key="titleColor" systemColor="labelColor"/>
+                                </state>
+                                <buttonConfiguration key="configuration" style="filled" title="SPIN" cornerStyle="capsule">
+                                    <fontDescription key="titleFontDescription" name="Chalkduster" family="Chalkduster" pointSize="39"/>
+                                    <color key="baseForegroundColor" systemColor="labelColor"/>
+                                    <color key="baseBackgroundColor" systemColor="systemIndigoColor"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="spin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Dul-3f-l0v"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J1q-Hf-Utj" userLabel="spin">
+                                <rect key="frame" x="0.0" y="258" width="440" height="440"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="iWj-C6-ANN" userLabel="b">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="771"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Spin the wheel" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="woq-Cu-JiA">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="80" id="sgx-YX-ty1"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="35"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J1q-Hf-Utj" userLabel="spin">
-                                                <rect key="frame" x="0.0" y="83" width="414" height="688"/>
-                                                <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="spin" translatesAutoresizingMaskIntoConstraints="NO" id="jag-rr-48A">
-                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="626"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    </imageView>
-                                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QSV-eO-tit">
-                                                        <rect key="frame" x="49" y="214" width="299" height="126"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" secondItem="QSV-eO-tit" secondAttribute="height" multiplier="299:126" id="yc6-bA-ofj"/>
-                                                        </constraints>
-                                                    </pickerView>
-                                                </subviews>
-                                                <constraints>
-                                                    <constraint firstAttribute="trailing" secondItem="QSV-eO-tit" secondAttribute="trailing" constant="66" id="C8N-6y-8Ni"/>
-                                                    <constraint firstItem="QSV-eO-tit" firstAttribute="leading" secondItem="J1q-Hf-Utj" secondAttribute="leading" constant="49" id="h6h-OR-zOJ"/>
-                                                    <constraint firstItem="QSV-eO-tit" firstAttribute="top" secondItem="J1q-Hf-Utj" secondAttribute="top" constant="214" id="tat-6d-fey"/>
-                                                </constraints>
-                                            </view>
-                                        </subviews>
-                                    </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uT0-Wd-pY0">
-                                        <rect key="frame" x="0.0" y="779" width="414" height="39.5"/>
-                                        <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="39"/>
-                                        <state key="normal" title="SPIN">
-                                            <color key="titleColor" systemColor="labelColor"/>
-                                        </state>
-                                        <buttonConfiguration key="configuration" style="tinted" title="SPIN" cornerStyle="capsule">
-                                            <fontDescription key="titleFontDescription" name="Chalkduster" family="Chalkduster" pointSize="39"/>
-                                            <color key="baseForegroundColor" systemColor="labelColor"/>
-                                            <color key="baseBackgroundColor" systemColor="systemIndigoColor"/>
-                                        </buttonConfiguration>
-                                        <connections>
-                                            <action selector="spin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Dul-3f-l0v"/>
-                                        </connections>
-                                    </button>
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="elh-od-mBl" userLabel="white bakcground">
+                                        <rect key="frame" x="101" y="118" width="238" height="204"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </view>
+                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cvN-EM-P7L">
+                                        <rect key="frame" x="0.0" y="76" width="440" height="225"/>
+                                    </pickerView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="spin" translatesAutoresizingMaskIntoConstraints="NO" id="jag-rr-48A">
+                                        <rect key="frame" x="0.0" y="0.0" width="440" height="440"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="jag-rr-48A" secondAttribute="height" multiplier="1:1" id="WOZ-tP-Zs6"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
-                            </stackView>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="jag-rr-48A" secondAttribute="bottom" id="6DA-a0-ou3"/>
+                                    <constraint firstItem="elh-od-mBl" firstAttribute="top" secondItem="J1q-Hf-Utj" secondAttribute="top" constant="118" id="9dk-QJ-yAI"/>
+                                    <constraint firstAttribute="trailing" secondItem="cvN-EM-P7L" secondAttribute="trailing" id="KAZ-gn-r5m"/>
+                                    <constraint firstAttribute="trailing" secondItem="jag-rr-48A" secondAttribute="trailing" id="Oqe-7Y-9KI"/>
+                                    <constraint firstItem="elh-od-mBl" firstAttribute="width" secondItem="jag-rr-48A" secondAttribute="width" multiplier="0.540909" id="TpC-1G-dWt"/>
+                                    <constraint firstItem="cvN-EM-P7L" firstAttribute="top" secondItem="J1q-Hf-Utj" secondAttribute="top" constant="76" id="VbH-PV-XWB"/>
+                                    <constraint firstAttribute="bottom" secondItem="cvN-EM-P7L" secondAttribute="bottom" constant="139" id="b80-nl-fqt"/>
+                                    <constraint firstItem="elh-od-mBl" firstAttribute="centerY" secondItem="J1q-Hf-Utj" secondAttribute="centerY" id="deE-D0-hQm"/>
+                                    <constraint firstItem="elh-od-mBl" firstAttribute="centerX" secondItem="J1q-Hf-Utj" secondAttribute="centerX" id="em7-3H-56S"/>
+                                    <constraint firstItem="cvN-EM-P7L" firstAttribute="leading" secondItem="J1q-Hf-Utj" secondAttribute="leading" id="fMA-v2-yfs"/>
+                                    <constraint firstItem="jag-rr-48A" firstAttribute="leading" secondItem="J1q-Hf-Utj" secondAttribute="leading" id="lmx-et-2xs"/>
+                                    <constraint firstItem="jag-rr-48A" firstAttribute="top" secondItem="J1q-Hf-Utj" secondAttribute="top" id="rxA-zR-CTM"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
                         <constraints>
-                            <constraint firstItem="dlt-nf-hjn" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="80g-Lx-hi1"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="dlt-nf-hjn" secondAttribute="bottom" constant="18.5" id="9Fu-Sk-znS"/>
-                            <constraint firstItem="FD6-7L-9hy" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="P63-8y-rIx"/>
-                            <constraint firstAttribute="trailing" secondItem="dlt-nf-hjn" secondAttribute="trailing" id="SYY-9O-0oE"/>
-                            <constraint firstItem="FD6-7L-9hy" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="T3d-m6-t0Q"/>
-                            <constraint firstItem="FD6-7L-9hy" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="eY9-5Z-WS0"/>
-                            <constraint firstItem="FD6-7L-9hy" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="pKZ-dd-h5A"/>
-                            <constraint firstItem="dlt-nf-hjn" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="25" id="s24-UL-03q"/>
+                            <constraint firstItem="FD6-7L-9hy" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="5ny-kX-Ht2"/>
+                            <constraint firstItem="uT0-Wd-pY0" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="5tL-IT-WVM"/>
+                            <constraint firstAttribute="bottom" secondItem="FD6-7L-9hy" secondAttribute="bottom" id="78J-vR-WVG"/>
+                            <constraint firstItem="J1q-Hf-Utj" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="152" id="CfW-MY-KYf"/>
+                            <constraint firstItem="FD6-7L-9hy" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="NEH-ci-d72"/>
+                            <constraint firstItem="J1q-Hf-Utj" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="RWS-9p-aXb"/>
+                            <constraint firstItem="FD6-7L-9hy" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="XGQ-Gf-Poa"/>
+                            <constraint firstItem="J1q-Hf-Utj" firstAttribute="leading" secondItem="uT0-Wd-pY0" secondAttribute="leading" id="YLO-rY-TWn"/>
+                            <constraint firstItem="J1q-Hf-Utj" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="bHe-q9-zC5"/>
+                            <constraint firstItem="uT0-Wd-pY0" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="g3m-gl-UpP"/>
+                            <constraint firstItem="uT0-Wd-pY0" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="iSI-Bv-UhU"/>
+                            <constraint firstItem="J1q-Hf-Utj" firstAttribute="width" secondItem="uT0-Wd-pY0" secondAttribute="width" id="vsC-KC-vti"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="XIJ-4D-emu"/>
+                    <navigationItem key="navigationItem" title="Spin the wheel" id="XIJ-4D-emu"/>
                     <connections>
                         <outlet property="buttonSpin" destination="uT0-Wd-pY0" id="D0s-zm-Dj6"/>
-                        <outlet property="labelResult" destination="woq-Cu-JiA" id="3MV-CH-fc7"/>
-                        <outlet property="pickerView" destination="QSV-eO-tit" id="gOs-KU-BHv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="928.98550724637687" y="677.67857142857144"/>
+            <point key="canvasLocation" x="928.63636363636374" y="677.19665271966528"/>
         </scene>
         <!--Spin Royale-->
         <scene sceneID="fc2-Dv-dLu">
             <objects>
                 <viewController id="NnK-uy-zKk" customClass="DragonViewController" customModule="Spin_Royale" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5D0-in-HZ7">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="440" height="956"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="Ebo-Xo-Z8z">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="0.0" width="440" height="956"/>
                             </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="c4E-eW-aKz">
-                                <rect key="frame" x="20" y="132" width="374" height="635.5"/>
+                                <rect key="frame" x="20" y="146" width="400" height="681.66666666666663"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Lpd-Gn-xh4">
                                     <size key="itemSize" width="129" height="76"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -119,15 +115,15 @@
                                 <cells/>
                             </collectionView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="8XF-DH-dt2">
-                                <rect key="frame" x="40" y="807.5" width="334" height="34.5"/>
+                                <rect key="frame" x="40" y="867.66666666666663" width="360" height="34.333333333333371"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7Yn-sK-Up7">
-                                        <rect key="frame" x="0.0" y="0.0" width="184" height="34.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="210" height="34.333333333333336"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="azc-9b-dVz">
-                                        <rect key="frame" x="284" y="0.0" width="50" height="34.5"/>
+                                        <rect key="frame" x="310" y="0.0" width="50" height="34.333333333333336"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" title="Bet">
                                             <color key="baseBackgroundColor" systemColor="systemIndigoColor"/>
@@ -171,32 +167,32 @@
             <objects>
                 <viewController id="joe-HY-7SG" customClass="HomeViewController" customModule="Spin_Royale" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Abn-t5-T7n">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="440" height="956"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="5Az-rl-1gE">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="0.0" width="440" height="956"/>
                             </imageView>
                             <visualEffectView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LaB-nj-plF">
-                                <rect key="frame" x="15" y="142" width="384" height="81.5"/>
+                                <rect key="frame" x="15" y="156" width="410" height="82"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="JOs-Lc-YSH" userLabel="VS View">
-                                    <rect key="frame" x="0.0" y="0.0" width="384" height="81"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="410" height="82"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="fct-aO-jIg">
-                                            <rect key="frame" x="5" y="5" width="374" height="71.5"/>
+                                            <rect key="frame" x="5" y="5" width="400" height="71.666666666666671"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="cMP-pZ-FeE">
-                                                    <rect key="frame" x="0.0" y="0.0" width="152.5" height="71.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="152.33333333333334" height="71.666666666666671"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Coins" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6w2-6E-sha">
-                                                            <rect key="frame" x="7" y="0.0" width="138.5" height="27"/>
+                                                            <rect key="frame" x="7" y="0.0" width="138.33333333333334" height="26.666666666666668"/>
                                                             <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="21"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wwC-oV-Y4b">
-                                                            <rect key="frame" x="25" y="38" width="102.5" height="33.5"/>
+                                                            <rect key="frame" x="24.999999999999993" y="38" width="102.33333333333331" height="33.666666666666657"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="33.5" id="oLC-ug-T7F"/>
                                                             </constraints>
@@ -211,16 +207,16 @@
                                                     </constraints>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="6LE-yZ-nf2">
-                                                    <rect key="frame" x="162.5" y="0.0" width="211.5" height="71.5"/>
+                                                    <rect key="frame" x="162.33333333333337" y="0.0" width="237.66666666666663" height="71.666666666666671"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Spins" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uQf-iV-i3t">
-                                                            <rect key="frame" x="38" y="0.0" width="135.5" height="28"/>
+                                                            <rect key="frame" x="51.333333333333314" y="0.0" width="135.33333333333334" height="28"/>
                                                             <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="22"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RIY-zE-Aw3">
-                                                            <rect key="frame" x="35" y="38" width="141.5" height="33.5"/>
+                                                            <rect key="frame" x="35" y="38" width="167.66666666666666" height="33.666666666666657"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="33.5" id="slt-Vq-6ik"/>
                                                             </constraints>
@@ -246,31 +242,31 @@
                                 <blurEffect style="regular"/>
                             </visualEffectView>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8xp-xe-ujP">
-                                <rect key="frame" x="44.5" y="298" width="325" height="300.5"/>
+                                <rect key="frame" x="57.333333333333371" y="327.66666666666669" width="325.33333333333326" height="301.00000000000006"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="EkF-Lu-NZR">
-                                    <rect key="frame" x="0.0" y="0.0" width="325" height="300.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="326" height="301"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="xsx-TG-bm1">
-                                            <rect key="frame" x="25.5" y="47.5" width="274" height="205.5"/>
+                                            <rect key="frame" x="26" y="47.3333333333333" width="273.33333333333331" height="205.66666666666663"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Daily Rewards" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="asj-dJ-krn">
-                                                    <rect key="frame" x="21" y="0.0" width="232.5" height="37"/>
+                                                    <rect key="frame" x="20.666666666666671" y="0.0" width="232.33333333333331" height="37"/>
                                                     <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="29"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="ckW-t8-LGY">
-                                                    <rect key="frame" x="0.0" y="45" width="274" height="102.5"/>
+                                                    <rect key="frame" x="0.0" y="45.000000000000007" width="273.33333333333331" height="102.66666666666669"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Collect 1000 coins" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mvf-v7-egE">
-                                                            <rect key="frame" x="0.0" y="39.5" width="206.5" height="23.5"/>
+                                                            <rect key="frame" x="0.0" y="39.666666666666686" width="206" height="23.333333333333329"/>
                                                             <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="19"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Ka-XV-EfT">
-                                                            <rect key="frame" x="224.5" y="26.5" width="49.5" height="49.5"/>
+                                                            <rect key="frame" x="224" y="26.666666666666689" width="49.333333333333314" height="49.333333333333343"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="0Ka-XV-EfT" secondAttribute="height" multiplier="1:1" id="xaI-cu-R5e"/>
                                                             </constraints>
@@ -289,16 +285,16 @@
                                                     </constraints>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="Ika-Tw-2cG">
-                                                    <rect key="frame" x="15.5" y="155.5" width="243" height="50"/>
+                                                    <rect key="frame" x="15.666666666666671" y="155.66666666666663" width="242.33333333333331" height="50"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Collect 10 spins" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Au7-vl-yco">
-                                                            <rect key="frame" x="0.0" y="13" width="175" height="24"/>
+                                                            <rect key="frame" x="0.0" y="13" width="174.66666666666666" height="24"/>
                                                             <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="19"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h5s-Di-lu7">
-                                                            <rect key="frame" x="193" y="0.0" width="50" height="50"/>
+                                                            <rect key="frame" x="192.66666666666669" y="0.0" width="49.666666666666657" height="49.666666666666664"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="h5s-Di-lu7" secondAttribute="height" multiplier="1:1" id="FUV-be-SjT"/>
                                                                 <constraint firstAttribute="width" secondItem="h5s-Di-lu7" secondAttribute="height" multiplier="1:1" id="nSl-lA-Cms"/>
@@ -337,7 +333,7 @@
                                 <blurEffect style="regular"/>
                             </visualEffectView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hs4-k3-hEx">
-                                <rect key="frame" x="139" y="747.5" width="136" height="34.5"/>
+                                <rect key="frame" x="152.33333333333337" y="807.66666666666663" width="135.66666666666663" height="34.333333333333371"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Spin the wheel">
                                     <color key="baseForegroundColor" systemColor="systemBackgroundColor"/>
@@ -348,7 +344,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ErV-hM-wBi">
-                                <rect key="frame" x="139.5" y="687.5" width="135" height="35"/>
+                                <rect key="frame" x="152.66666666666669" y="747.66666666666663" width="134.66666666666669" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="F01-JC-9HJ"/>
                                 </constraints>
@@ -398,7 +394,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ey3-K1-7wU" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="fOd-Rr-MAh">
-                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="62" width="440" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
