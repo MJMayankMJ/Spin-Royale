@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="joe-HY-7SG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ey3-K1-7wU">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
@@ -13,14 +13,14 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="SlotViewController" customModule="Spin_Royale" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="FD6-7L-9hy">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
+                                <rect key="frame" x="0.0" y="92" width="414" height="770"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="dlt-nf-hjn" userLabel="a">
-                                <rect key="frame" x="0.0" y="25" width="414" height="842.5"/>
+                                <rect key="frame" x="0.0" y="25" width="414" height="818.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="iWj-C6-ANN" userLabel="b">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="771"/>
@@ -56,7 +56,7 @@
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uT0-Wd-pY0">
-                                        <rect key="frame" x="0.0" y="779" width="414" height="63.5"/>
+                                        <rect key="frame" x="0.0" y="779" width="414" height="39.5"/>
                                         <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="39"/>
                                         <state key="normal" title="SPIN">
                                             <color key="titleColor" systemColor="labelColor"/>
@@ -95,21 +95,21 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="19" y="678"/>
+            <point key="canvasLocation" x="928.98550724637687" y="677.67857142857144"/>
         </scene>
-        <!--Dragon View Controller-->
+        <!--Spin Royale-->
         <scene sceneID="fc2-Dv-dLu">
             <objects>
                 <viewController id="NnK-uy-zKk" customClass="DragonViewController" customModule="Spin_Royale" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5D0-in-HZ7">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="Ebo-Xo-Z8z">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="c4E-eW-aKz">
-                                <rect key="frame" x="20" y="40" width="374" height="751.5"/>
+                                <rect key="frame" x="20" y="132" width="374" height="635.5"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Lpd-Gn-xh4">
                                     <size key="itemSize" width="129" height="76"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -119,7 +119,7 @@
                                 <cells/>
                             </collectionView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="8XF-DH-dt2">
-                                <rect key="frame" x="40" y="831.5" width="334" height="34.5"/>
+                                <rect key="frame" x="40" y="807.5" width="334" height="34.5"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7Yn-sK-Up7">
                                         <rect key="frame" x="0.0" y="0.0" width="184" height="34.5"/>
@@ -155,7 +155,7 @@
                             <constraint firstItem="8XF-DH-dt2" firstAttribute="leading" secondItem="kq0-it-o4J" secondAttribute="leading" constant="40" id="zjJ-77-0Ms"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="ZSx-B5-8yl"/>
+                    <navigationItem key="navigationItem" title="Spin Royale" largeTitleDisplayMode="always" id="ZSx-B5-8yl"/>
                     <connections>
                         <outlet property="betButton" destination="azc-9b-dVz" id="cMb-Uk-ueY"/>
                         <outlet property="betTextField" destination="7Yn-sK-Up7" id="fif-pw-lTJ"/>
@@ -164,7 +164,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E99-ee-dKO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="18.840579710144929" y="-78.348214285714278"/>
+            <point key="canvasLocation" x="928.98550724637687" y="-78.348214285714278"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="seK-UL-6EW">
@@ -178,7 +178,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <visualEffectView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LaB-nj-plF">
-                                <rect key="frame" x="15" y="98" width="384" height="81.5"/>
+                                <rect key="frame" x="15" y="142" width="384" height="81.5"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="JOs-Lc-YSH" userLabel="VS View">
                                     <rect key="frame" x="0.0" y="0.0" width="384" height="81"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -246,9 +246,9 @@
                                 <blurEffect style="regular"/>
                             </visualEffectView>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8xp-xe-ujP">
-                                <rect key="frame" x="44.5" y="297.5" width="325" height="301"/>
+                                <rect key="frame" x="44.5" y="298" width="325" height="300.5"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="EkF-Lu-NZR">
-                                    <rect key="frame" x="0.0" y="0.0" width="325" height="301"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="325" height="300.5"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="xsx-TG-bm1">
@@ -380,6 +380,7 @@
                             <constraint firstItem="Hs4-k3-hEx" firstAttribute="centerX" secondItem="Abn-t5-T7n" secondAttribute="centerX" id="yGP-Wx-4dE"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="vxQ-Wk-1Wb"/>
                     <connections>
                         <outlet property="buttonCollectCoins" destination="0Ka-XV-EfT" id="hpI-JC-OZM"/>
                         <outlet property="buttonCollectSpins" destination="h5s-Di-lu7" id="gi8-rY-rDf"/>
@@ -389,7 +390,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QuO-cs-y64" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-935" y="155"/>
+            <point key="canvasLocation" x="-26.086956521739133" y="154.6875"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="7dL-u6-lJy">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ey3-K1-7wU" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fOd-Rr-MAh">
+                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="joe-HY-7SG" kind="relationship" relationship="rootViewController" id="BcG-hb-df2"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="L2J-YW-F4J" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-936.23188405797111" y="154.6875"/>
         </scene>
     </scenes>
     <resources>

@@ -9,7 +9,7 @@ import UIKit
 
 class DragonViewController: UIViewController {
     
-    // MARK: - IBOutlets (connect these in your storyboard)
+    // MARK: - IBOutlets
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var betTextField: UITextField!
     @IBOutlet weak var betButton: UIButton!
@@ -29,11 +29,14 @@ class DragonViewController: UIViewController {
         collectionView.register(nib, forCellWithReuseIdentifier: "EggCell")
         
         collectionView.backgroundColor = .clear
+        
+        // Initially, the button title is "Bet"
+        betButton.setTitle("Bet", for: .normal)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        // Fade-in animation for the collection view.
+        // Fade-in animation.
         collectionView.alpha = 0
         UIView.animate(withDuration: 0.5) {
             self.collectionView.alpha = 1
@@ -42,18 +45,57 @@ class DragonViewController: UIViewController {
     
     // MARK: - IBActions
     @IBAction func betButtonTapped(_ sender: UIButton) {
-        // Read the bet value.
-        guard let betText = betTextField.text, let betValue = Int(betText) else {
-            print("Invalid bet")
-            return
+        // If the button title is "Bet", process a new wager.
+        if sender.title(for: .normal) == "Bet" {
+            // Read the bet value.
+            guard let betText = betTextField.text, let betValue = Int(betText) else {
+                print("Invalid bet")
+                return
+            }
+            print("Bet pressed: \(betValue). Starting game...")
+            viewModel.betAmount = betValue
+            
+            // Deduct coins immediately.
+            CoinsManager.shared.deductCoins(amount: Int64(betValue)) { result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success():
+                        // Start the game by generating the board and highlighting the bottom row.
+                        self.viewModel.startGame()
+                        self.collectionView.reloadData()
+                    case .failure(let error):
+                        let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: .default))
+                        self.present(alert, animated: true)
+                    }
+                }
+            }
+        } else {
+            // The button says "Cash out" – cash out the game.
+            cashOutGame()
         }
-        print("Bet pressed: \(betValue). Starting game...")
-        viewModel.betAmount = betValue
-        viewModel.coinBalance -= betValue
+    }
+    
+    /// Cash out the current game.
+    func cashOutGame() {
+        // Finalize current winnings.
+        let bet = viewModel.betAmount
+        let finalAmt = viewModel.finalAmount(forBet: bet)
+        let netGain = viewModel.netGain(forBet: bet)
         
-        // Start the game by generating the full board and highlighting the bottom row.
-        viewModel.startGame()
-        collectionView.reloadData()
+        // Optionally, reveal the entire board.
+        viewModel.revealEntireBoard()
+        viewModel.gameOver = true
+        
+        // Process the cash-out as a game over.
+        UIView.transition(with: collectionView,
+                          duration: 0.5,
+                          options: .transitionCrossDissolve,
+                          animations: {
+            self.collectionView.reloadData()
+        }, completion: { _ in
+            self.showGameOverAlert(isCashOut: true, finalAmt: finalAmt, netGain: netGain)
+        })
     }
 }
 
@@ -76,16 +118,16 @@ extension DragonViewController: UICollectionViewDataSource {
 // MARK: - UICollectionViewDelegate
 extension DragonViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // Determine which row the tapped cell belongs to.
+        // Determine tapped cell's row.
         let row = indexPath.item / viewModel.totalColumns
         
-        // Allow tap only if it's the active (highlighted) row.
+        // Process tap only on active (highlighted) row.
         if row == viewModel.activeRow {
             let col = indexPath.item % viewModel.totalColumns
             let outcome = viewModel.board[row][col]
             
             if outcome == .skull {
-                // Skull tapped: reveal entire board and mark game over.
+                // Skull tapped: reveal board, game over.
                 viewModel.revealEntireBoard()
                 viewModel.currentMultiplier = 0.0
                 viewModel.gameOver = true
@@ -96,7 +138,7 @@ extension DragonViewController: UICollectionViewDelegate {
                                   animations: {
                     self.collectionView.reloadData()
                 }, completion: { _ in
-                    self.showGameOverAlert()
+                    self.showGameOverAlert(isCashOut: false, finalAmt: self.viewModel.finalAmount(forBet: self.viewModel.betAmount), netGain: self.viewModel.netGain(forBet: self.viewModel.betAmount))
                 })
             } else {
                 // Egg tapped: reveal this row.
@@ -111,64 +153,68 @@ extension DragonViewController: UICollectionViewDelegate {
                     // Move active row up.
                     self.viewModel.activeRow -= 1
                     if self.viewModel.activeRow >= 0 {
-                        // Highlight the next row.
                         self.viewModel.highlightRow(self.viewModel.activeRow)
                         self.collectionView.reloadData()
+                        // Change button title to "Cash out" after the first row is revealed.
+                        self.betButton.setTitle("Cash out", for: .normal)
                     } else {
                         // No more rows: game complete.
                         self.viewModel.gameOver = true
-                        self.showGameOverAlert()
+                        self.showGameOverAlert(isCashOut: false, finalAmt: self.viewModel.finalAmount(forBet: self.viewModel.betAmount), netGain: self.viewModel.netGain(forBet: self.viewModel.betAmount))
                     }
                 })
             }
         }
     }
 }
-//extension DragonViewController: UICollectionViewDelegate {
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        // testing
-//        print("ddone")
-//        for i in 0..<viewModel.cells.count {
-//            viewModel.cells[i].state = .skull
-//        }
-//        
-//        UIView.transition(with: collectionView,
-//                          duration: 0.5,
-//                          options: .transitionCrossDissolve,
-//                          animations: {
-//            self.collectionView.reloadData()
-//        }, completion: nil)
-//    }
-//}
-
 
 // MARK: - Game Over Alert
 extension DragonViewController {
-    private func showGameOverAlert() {
+    /// Presents a game-over alert.
+    /// - Parameters:
+    ///   - isCashOut: True if this ended by cashing out.
+    ///   - finalAmt: Final winning amount.
+    ///   - netGain: Net gain (finalAmt - bet).
+    private func showGameOverAlert(isCashOut: Bool, finalAmt: Double, netGain: Double) {
         let bet = viewModel.betAmount
-        let finalAmt = viewModel.finalAmount(forBet: bet)
-        let netGain = viewModel.netGain(forBet: bet)
-        
+        let titleText = isCashOut ? "Cashed Out" : "Game Over"
         let message = "Bet: \(bet)\nFinal Amount: \(Int(finalAmt))\nNet Gain: \(Int(netGain))"
-        let alert = UIAlertController(title: "Game Over", message: message, preferredStyle: .alert)
+        let alert = UIAlertController(title: titleText, message: message, preferredStyle: .alert)
         
-        // "OK" resets the game completely (user must enter a new bet).
+        // "OK" resets the game and, if applicable, adds winnings.
         let okAction = UIAlertAction(title: "OK", style: .default) { _ in
-            // Reset game state (for a fresh start).
+            if self.viewModel.currentMultiplier > 1.0 {
+                // Add winnings via CoinsManager.
+                CoinsManager.shared.addCoins(amount: Int64(finalAmt)) { result in
+                    DispatchQueue.main.async {
+                        switch result {
+                        case .success():
+                            print("Winnings added successfully.")
+                        case .failure(let error):
+                            let errorAlert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                            errorAlert.addAction(UIAlertAction(title: "OK", style: .default))
+                            self.present(errorAlert, animated: true)
+                        }
+                    }
+                }
+            }
+            // Reset game state and update button title back to "Bet".
             self.viewModel.resetGame()
             self.betTextField.text = ""
+            self.betButton.setTitle("Bet", for: .normal)
             self.collectionView.reloadData()
         }
         
-        // "Replay" resets the game with the same bet amount.
+        // "Replay" simply resets the game with the same bet amount.
         let replayAction = UIAlertAction(title: "Replay", style: .default) { _ in
             self.viewModel.resetGame()
+            self.betButton.setTitle("Bet", for: .normal)
             self.collectionView.reloadData()
         }
         
         alert.addAction(okAction)
         alert.addAction(replayAction)
-        present(alert, animated: true, completion: nil)
+        self.present(alert, animated: true)
     }
 }
 

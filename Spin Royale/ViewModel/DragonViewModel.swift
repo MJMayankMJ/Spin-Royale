@@ -19,15 +19,13 @@ class DragonViewModel {
     // Flat array used by the collection view (27 cells).
     var cells: [DragonCellData] = []
     
-    // 2D array representing the full board outcomes.
-    // Each row will have exactly 2 eggs and 1 skull.
+    // 2D array for full board outcomes
     var board: [[EggCellState]] = []
     
     // Active row index: row 0 is top, row 8 is bottom.
     // Initially no row is active until the game starts.
     var activeRow: Int = -1
     
-    var coinBalance: Int = 10000
     var betAmount: Int = 0
     
     var currentMultiplier: Double = 1.0
