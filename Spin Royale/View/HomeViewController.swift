@@ -73,6 +73,10 @@ class HomeViewController: UIViewController {
                // If presenting as a sheet:
                slotVC.presentationController?.delegate = self
            }
+        if segue.identifier == K.segueToDragonVC,
+           let slotVC = segue.destination as? DragonViewController {
+//            slotVC.userStats = self.viewModel.userStats
+        }
        }
 
 }

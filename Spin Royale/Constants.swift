@@ -23,4 +23,5 @@ enum K {
     static let darkTile = "tileBackground"
     static let skullPNG = "skull"
     static let eggPNG = "egg"
+    static let segueToDragonVC = "toDragonVC"
 }

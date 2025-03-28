@@ -33,10 +33,11 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="5sM-yG-X3U" secondAttribute="trailing" id="58L-B4-abj"/>
-                            <constraint firstItem="Fc5-uw-sAz" firstAttribute="leading" secondItem="zMS-xU-42w" secondAttribute="leading" constant="97" id="7AH-PG-Dcg"/>
+                            <constraint firstItem="Fc5-uw-sAz" firstAttribute="height" secondItem="5sM-yG-X3U" secondAttribute="height" multiplier="0.897436" id="9ok-iu-oiE"/>
                             <constraint firstItem="5sM-yG-X3U" firstAttribute="leading" secondItem="zMS-xU-42w" secondAttribute="leading" id="C0g-7u-6eo"/>
                             <constraint firstItem="Fc5-uw-sAz" firstAttribute="centerY" secondItem="zMS-xU-42w" secondAttribute="centerY" id="HfR-N5-CDT"/>
                             <constraint firstAttribute="bottom" secondItem="5sM-yG-X3U" secondAttribute="bottom" id="XiB-vE-OdJ"/>
+                            <constraint firstItem="Fc5-uw-sAz" firstAttribute="width" secondItem="5sM-yG-X3U" secondAttribute="width" multiplier="0.265152" id="amh-oe-u5b"/>
                             <constraint firstItem="5sM-yG-X3U" firstAttribute="top" secondItem="zMS-xU-42w" secondAttribute="top" id="aub-lC-Nqw"/>
                             <constraint firstItem="Fc5-uw-sAz" firstAttribute="centerX" secondItem="zMS-xU-42w" secondAttribute="centerX" id="e3J-Gg-6kK"/>
                         </constraints>
