@@ -26,6 +26,11 @@ extension UserStats {
 
 }
 
-extension UserStats : Identifiable {
-
+extension UserStats {
+//    public override func awakeFromInsert() {
+//        super.awakeFromInsert()
+////        self.collectedSpinsToday = false
+////        self.dailySpinsRemaining = 10
+//    }
 }
+

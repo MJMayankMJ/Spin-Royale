@@ -10,8 +10,14 @@ import Foundation
 class SlotViewModel {
     
     // MARK: - Properties
+    var onUpdate: (() -> Void)?
     var userStats: UserStats?
     var dataArray: [[Int]] = [[], [], []]
+    
+    //....
+    var dailySpinsRemaining: Int16 {
+        return userStats?.dailySpinsRemaining ?? 0
+    }
     
     // MARK: - Initialization
     init(userStats: UserStats?) {
@@ -94,5 +100,32 @@ class SlotViewModel {
     func decrementSpin() {
         guard let stats = userStats else { return }
         stats.dailySpinsRemaining -= 1
+    }
+    
+    
+    //MARK: - ...
+    func checkDailyReward() {
+        guard let stats = userStats else { return }
+        
+        let today = Date() // We can optionally do calendar.startOfDay(for: Date()), but we store only "yyyy-MM-dd" in the Keychain anyway.
+        
+        // Spins
+        let spinsClaimed = KeychainHelper.shared.isDayClaimed(today, for: "claimedSpinsDates")
+        stats.collectedSpinsToday = spinsClaimed
+        
+        CoreDataManager.shared.saveContext()
+        onUpdate?()
+    }
+    
+    // Adds today's date to the Keychain array for spins, updates the stats, and saves.
+    func collectSpins() {
+        guard let stats = userStats, !stats.collectedSpinsToday else { return }
+        
+        stats.dailySpinsRemaining += 10
+        stats.collectedSpinsToday = true
+        CoreDataManager.shared.saveContext()
+        
+        KeychainHelper.shared.addClaimedDay(Date(), for: "claimedSpinsDates")
+        onUpdate?()
     }
 }

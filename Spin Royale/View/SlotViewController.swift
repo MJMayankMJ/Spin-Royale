@@ -9,8 +9,10 @@ import UIKit
 
 class SlotViewController: UIViewController {
     
+    var spinsLabel: UILabel!
+    
     // MARK: - IBOutlets
-    @IBOutlet weak var labelResult: UILabel!
+    // Removed labelResult outlet.
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var buttonSpin: UIButton!
     
@@ -37,6 +39,11 @@ class SlotViewController: UIViewController {
         
         setupUIAndSound()
         
+        // Set up the spins display.
+        setupNavigationSpinsDisplay()
+       // NotificationCenter.default.addObserver(self, selector: #selector(spinsDidChange), name: CoinsManager.spinsDidChangeNotification, object: nil)
+
+        
         // Spin once on load
         let selectedRows = viewModel.spinSlots()
         for (i, row) in selectedRows.enumerated() {
@@ -46,26 +53,47 @@ class SlotViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        // Fade in the spin button
+        
+        // Fade in the spin button.
         UIView.animate(withDuration: 0.5,
                        delay: 0.3,
                        options: .curveEaseOut,
                        animations: { self.buttonSpin.alpha = 1 },
                        completion: nil)
+        
+        // Check if spins have been collected today.
+        if let stats = viewModel.userStats, !stats.collectedSpinsToday {
+            // Show daily spins alert only once per day.
+            let alert = UIAlertController(title: "Daily Spins", message: "Would you like to collect your daily spins?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Collect", style: .default, handler: { _ in
+                // Call collectSpins, which updates the stats and saves the day in the Keychain.
+                self.viewModel.collectSpins()
+                self.updateSpinsUI()
+            }))
+            alert.addAction(UIAlertAction(title: "Later", style: .cancel))
+            present(alert, animated: true)
+        }
     }
+
     
     // MARK: - IBActions
+    
     @IBAction func spin(_ sender: AnyObject) {
-        // 1. Check if the user has spins left
+        // 1. Check if the user has spins left.
         guard viewModel.canSpin() else {
-            labelResult.text = "No spins left"
+            // Show alert if no spins left.
+            let alert = UIAlertController(title: "No Spins Left", message: "You don't have any spins left.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                self.navigationController?.popViewController(animated: true)
+            }))
+            present(alert, animated: true)
             return
         }
         
-        // 2. Decrement spins
+        // 2. Decrement spins.
         viewModel.decrementSpin()
         
-        // 3. Play sounds and spin
+        // 3. Play sounds and perform the spin.
         winSound.pause()
         rattle.play()
         
@@ -74,17 +102,29 @@ class SlotViewController: UIViewController {
             pickerView.selectRow(row, inComponent: i, animated: true)
         }
         
-        // 4. Check win or lose
+        // 4. Check win or lose.
         let outcome = viewModel.checkWinOrLose(selectedRows: selectedRows)
-        labelResult.text = outcome.message
+        // For testing, print the outcome message.
+        print("Outcome: \(outcome.message)")
         if outcome.playWinSound {
             winSound.play()
         }
         
-        // 5. Animate button and save changes
+        // 5. Animate the button.
         animateButton()
+        
+        // 6. Save changes to Core Data.
         CoreDataManager.shared.saveContext()
+        updateSpinsUI()
     }
+
+    func updateSpinsUI() {
+        // Update your spins label using the viewModel's dailySpinsRemaining property.
+        spinsLabel.text = "\(viewModel.dailySpinsRemaining)"
+        print("\(viewModel.dailySpinsRemaining)")
+    }
+
+    
     
     // MARK: - UI Setup and Animations
     func setupUIAndSound() {
@@ -97,22 +137,10 @@ class SlotViewController: UIViewController {
         // UI setup
         buttonSpin.alpha = 0
         bounds = buttonSpin.bounds
-        setTrim()
         
-        labelResult.layer.cornerRadius = 10
-        labelResult.layer.masksToBounds = true
+        // Removed labelResult UI configuration.
         pickerView.layer.cornerRadius = 10
         buttonSpin.layer.cornerRadius = 40
-    }
-    
-    func setTrim() {
-        labelResult.layer.borderColor = UIColor.label.cgColor
-        pickerView.layer.borderColor = UIColor.label.cgColor
-        buttonSpin.layer.borderColor = UIColor.label.cgColor
-        
-        labelResult.layer.borderWidth = 2
-        pickerView.layer.borderWidth = 2
-        buttonSpin.layer.borderWidth = 2
     }
     
     func animateButton() {
@@ -148,9 +176,9 @@ extension SlotViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         return 100
     }
     
-    func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
-        return 80.0
-    }
+//    func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
+//        return 80.0
+//    }
     
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
         return 120.0
@@ -167,8 +195,8 @@ extension SlotViewController: UIPickerViewDelegate, UIPickerViewDataSource {
             pickerLabel = reusedLabel
         } else {
             pickerLabel = UILabel()
-            pickerLabel.textAlignment = .center
-            pickerLabel.font = UIFont(name: K.emojiFont, size: 75)
+            pickerLabel.textAlignment = .justified
+            pickerLabel.font = UIFont(name: K.emojiFont, size: 40)
         }
         
         // Use the index from viewModel's data to pick the correct emoji from K.imageArray
@@ -177,4 +205,35 @@ extension SlotViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         
         return pickerLabel
     }
+}
+
+extension SlotViewController {
+    func setupNavigationSpinsDisplay() {
+        // Define container size.
+        let containerWidth: CGFloat = 100
+        let containerHeight: CGFloat = 30
+        let container = UIView(frame: CGRect(x: 0, y: 0, width: containerWidth, height: containerHeight))
+        
+        // image view for the spins icon.
+        let spinsImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
+        let symbolConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .regular, scale: .medium)
+        let symbolImage = UIImage(systemName: "bitcoinsign.circle.fill", withConfiguration: symbolConfig)
+        spinsImageView.image = symbolImage
+        spinsImageView.tintColor = .systemYellow
+        spinsImageView.contentMode = .scaleAspectFit
+        container.addSubview(spinsImageView)
+        
+        //label to display the remaining spins.
+        spinsLabel = UILabel(frame: CGRect(x: 30, y: 0, width: containerWidth - 30, height: containerHeight))
+        spinsLabel.text = "\(viewModel.userStats?.dailySpinsRemaining ?? 0)"
+        spinsLabel.font = UIFont.systemFont(ofSize: 16)
+        spinsLabel.textColor = .black
+        spinsLabel.textAlignment = .left
+        container.addSubview(spinsLabel)
+        
+        let spinsBarButtonItem = UIBarButtonItem(customView: container)
+        navigationItem.rightBarButtonItem = spinsBarButtonItem
+        updateSpinsUI()
+    }
+
 }

@@ -45,8 +45,9 @@ class CoreDataManager {
             } else {
                 // Create new user stats record if none exists
                 let newStats = UserStats(context: context)
-                newStats.totalCoins = 0
-                newStats.dailySpinsRemaining = 0
+                newStats.totalCoins = 100
+                newStats.dailySpinsRemaining = 5
+               // newStats.collectedSpinsToday = false  // ...................
                 newStats.lastDailyRewardDate = nil
                 saveContext()
                 return newStats

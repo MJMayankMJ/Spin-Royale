@@ -14,7 +14,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var labelTotalSpins: UILabel!
     
     @IBOutlet weak var buttonCollectCoins: UIButton!
-    @IBOutlet weak var buttonCollectSpins: UIButton!
+//    @IBOutlet weak var buttonCollectSpins: UIButton!
     
     private var viewModel: HomeViewModel = HomeViewModel()
     
@@ -43,18 +43,19 @@ class HomeViewController: UIViewController {
     func updateUI() {
         labelTotalCoins.text = "\(viewModel.totalCoins)"
         labelTotalSpins.text = "\(viewModel.dailySpinsRemaining)"
+        print("\(viewModel.dailySpinsRemaining)")
         
         buttonCollectCoins.isEnabled = viewModel.canCollectCoins
-        buttonCollectSpins.isEnabled = viewModel.canCollectSpins
+//        buttonCollectSpins.isEnabled = viewModel.canCollectSpins
     }
     
     @IBAction func didTapCollectCoins(_ sender: UIButton) {
         viewModel.collectCoins()
     }
     
-    @IBAction func didTapCollectSpins(_ sender: UIButton) {
-        viewModel.collectSpins()
-    }
+//    @IBAction func didTapCollectSpins(_ sender: UIButton) {
+//        viewModel.collectSpins()
+//    }
     
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //        if segue.identifier == K.homeToSlotVC,
@@ -75,7 +76,7 @@ class HomeViewController: UIViewController {
            }
         if segue.identifier == K.segueToDragonVC,
            let _ = segue.destination as? DragonViewController {
-//            slotVC.userStats = self.viewModel.userStats
+           // slotVC.userStats = self.viewModel.userStats
         }
        }
 

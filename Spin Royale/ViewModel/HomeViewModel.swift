@@ -18,7 +18,7 @@ class HomeViewModel {
     }
     
     var dailySpinsRemaining: Int16 {
-        return userStats?.dailySpinsRemaining ?? 0
+        return userStats?.dailySpinsRemaining ?? 100
     }
     
     var canCollectCoins: Bool {
@@ -72,7 +72,8 @@ class HomeViewModel {
     
     // Adds today's date to the Keychain array for spins, updates the stats, and saves.
     func collectSpins() {
-        guard let stats = userStats, !stats.collectedSpinsToday else { return }
+        guard let stats = userStats,
+              !stats.collectedSpinsToday else { return }
         
         stats.dailySpinsRemaining += 10
         stats.collectedSpinsToday = true
