@@ -47,7 +47,6 @@ class CoreDataManager {
                 let newStats = UserStats(context: context)
                 newStats.totalCoins = 100
                 newStats.dailySpinsRemaining = 5
-               // newStats.collectedSpinsToday = false  // ...................
                 newStats.lastDailyRewardDate = nil
                 saveContext()
                 return newStats

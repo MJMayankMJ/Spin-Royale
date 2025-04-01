@@ -15,7 +15,6 @@ class CoinsManager {
         return CoreDataManager.shared.fetchUserStats()
     }
     
-    // Notification name for coin changes.
     static let coinsDidChangeNotification = Notification.Name("CoinsDidChangeNotification")
     
     func deductCoins(amount: Int64, completion: @escaping (Result<Void, Error>) -> Void) {
@@ -26,6 +25,7 @@ class CoinsManager {
         }
         stats.totalCoins -= amount
         CoreDataManager.shared.saveContext()
+        
         // Notify listeners that coins have changed.
         NotificationCenter.default.post(name: CoinsManager.coinsDidChangeNotification, object: nil)
         completion(.success(()))

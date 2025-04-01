@@ -172,9 +172,9 @@
                                 <rect key="frame" x="0.0" y="0.0" width="440" height="956"/>
                             </imageView>
                             <visualEffectView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LaB-nj-plF" userLabel="V1">
-                                <rect key="frame" x="47.333333333333343" y="156" width="345.33333333333326" height="80.666666666666686"/>
+                                <rect key="frame" x="47.666666666666657" y="156" width="345" height="80"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="JOs-Lc-YSH" userLabel="VS View">
-                                    <rect key="frame" x="0.0" y="0.0" width="346" height="81"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="345" height="80"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="fct-aO-jIg">
@@ -184,13 +184,13 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="152.33333333333334" height="70.333333333333329"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Coins" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6w2-6E-sha">
-                                                            <rect key="frame" x="7" y="0.0" width="138.33333333333337" height="26.666666666666668"/>
+                                                            <rect key="frame" x="7" y="0.0" width="138.33333333333334" height="26.666666666666668"/>
                                                             <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="21"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wwC-oV-Y4b">
-                                                            <rect key="frame" x="24.999999999999993" y="36.666666666666657" width="102.33333333333331" height="33.666666666666657"/>
+                                                            <rect key="frame" x="25.000000000000007" y="36.666666666666657" width="102.33333333333334" height="33.666666666666657"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="33.5" id="oLC-ug-T7F"/>
                                                             </constraints>
@@ -214,7 +214,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QeW-Qi-fLf">
-                                                            <rect key="frame" x="25.000000000000021" y="36.666666666666657" width="93.333333333333314" height="33.666666666666657"/>
+                                                            <rect key="frame" x="24.999999999999993" y="36.666666666666657" width="93.333333333333314" height="33.666666666666657"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="33.5" id="3YZ-Fu-b6C"/>
                                                             </constraints>
@@ -243,7 +243,7 @@
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8xp-xe-ujP" userLabel="V2">
                                 <rect key="frame" x="51" y="356.66666666666669" width="338" height="243.00000000000006"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="EkF-Lu-NZR">
-                                    <rect key="frame" x="0.0" y="0.0" width="338" height="243"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="338" height="243.00000000000006"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="xsx-TG-bm1">

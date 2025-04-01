@@ -32,24 +32,27 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="5sM-yG-X3U" secondAttribute="trailing" id="0ib-f2-PB3"/>
+                            <constraint firstItem="5sM-yG-X3U" firstAttribute="top" secondItem="zMS-xU-42w" secondAttribute="top" id="1e5-tg-d6w"/>
                             <constraint firstAttribute="trailing" secondItem="5sM-yG-X3U" secondAttribute="trailing" id="58L-B4-abj"/>
                             <constraint firstItem="Fc5-uw-sAz" firstAttribute="height" secondItem="5sM-yG-X3U" secondAttribute="height" multiplier="0.897436" id="9ok-iu-oiE"/>
                             <constraint firstItem="5sM-yG-X3U" firstAttribute="leading" secondItem="zMS-xU-42w" secondAttribute="leading" id="C0g-7u-6eo"/>
                             <constraint firstItem="Fc5-uw-sAz" firstAttribute="centerY" secondItem="zMS-xU-42w" secondAttribute="centerY" id="HfR-N5-CDT"/>
+                            <constraint firstAttribute="bottom" secondItem="5sM-yG-X3U" secondAttribute="bottom" id="IM3-KR-viY"/>
                             <constraint firstAttribute="bottom" secondItem="5sM-yG-X3U" secondAttribute="bottom" id="XiB-vE-OdJ"/>
                             <constraint firstItem="Fc5-uw-sAz" firstAttribute="width" secondItem="5sM-yG-X3U" secondAttribute="width" multiplier="0.265152" id="amh-oe-u5b"/>
                             <constraint firstItem="5sM-yG-X3U" firstAttribute="top" secondItem="zMS-xU-42w" secondAttribute="top" id="aub-lC-Nqw"/>
                             <constraint firstItem="Fc5-uw-sAz" firstAttribute="centerX" secondItem="zMS-xU-42w" secondAttribute="centerX" id="e3J-Gg-6kK"/>
+                            <constraint firstItem="5sM-yG-X3U" firstAttribute="leading" secondItem="zMS-xU-42w" secondAttribute="leading" id="y0E-gz-6VY"/>
                         </constraints>
                     </view>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="zMS-xU-42w" secondAttribute="trailing" id="20E-uO-Slb"/>
-                <constraint firstItem="zMS-xU-42w" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="LJF-gQ-vfs"/>
-                <constraint firstAttribute="bottom" secondItem="zMS-xU-42w" secondAttribute="bottom" id="bhD-lG-hBY"/>
-                <constraint firstItem="zMS-xU-42w" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="w5B-84-5xH"/>
+                <constraint firstItem="zMS-xU-42w" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="8eq-Kr-6bq"/>
+                <constraint firstItem="zMS-xU-42w" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="M9Q-mW-TZ4"/>
+                <constraint firstItem="zMS-xU-42w" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="muk-uO-vpf"/>
             </constraints>
             <size key="customSize" width="264" height="78"/>
             <connections>
