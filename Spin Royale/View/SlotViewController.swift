@@ -12,7 +12,6 @@ class SlotViewController: UIViewController {
     var spinsLabel: UILabel!
     
     // MARK: - IBOutlets
-    // Removed labelResult outlet.
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var buttonSpin: UIButton!
     
@@ -38,13 +37,9 @@ class SlotViewController: UIViewController {
         viewModel = SlotViewModel(userStats: userStats)
         
         setupUIAndSound()
-        
-        // Set up the spins display.
+    
         setupNavigationSpinsDisplay()
-       // NotificationCenter.default.addObserver(self, selector: #selector(spinsDidChange), name: CoinsManager.spinsDidChangeNotification, object: nil)
-
-        
-        // Spin once on load
+        // Spin once on load -- (randomness)
         let selectedRows = viewModel.spinSlots()
         for (i, row) in selectedRows.enumerated() {
             pickerView.selectRow(row, inComponent: i, animated: true)

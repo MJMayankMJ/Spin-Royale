@@ -30,26 +30,24 @@ class EggCell: UICollectionViewCell {
     func configureCell(state: EggCellState) {
         switch state {
         case .normal:
-            tileImageView.image = UIImage(named: K.darkTile)      // Dark tile image asset
+            tileImageView.image = UIImage(named: K.darkTile)
             centerImageView.isHidden = true
             
         case .highlighted:
-            tileImageView.image = UIImage(named: K.lightTile)     // Light tile image asset
+            tileImageView.image = UIImage(named: K.lightTile)
             centerImageView.isHidden = true
             
         case .egg:
             centerImageView.isHidden = false
             tileImageView.image = UIImage(named: K.darkTile)
-            centerImageView.image = UIImage(named: K.eggPNG)       // Egg image asset
+            centerImageView.image = UIImage(named: K.eggPNG)
             
             //tileImageView.isHidden = true
             
         case .skull:
             centerImageView.isHidden = false
             tileImageView.image = UIImage(named: K.darkTile)
-            centerImageView.image = UIImage(named: K.skullPNG)     // Skull image asset
-            
-            //tileImageView.isHidden = true
+            centerImageView.image = UIImage(named: K.skullPNG)
         }
     }
 }

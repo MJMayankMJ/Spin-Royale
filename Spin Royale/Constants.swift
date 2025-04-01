@@ -13,7 +13,6 @@ enum K {
     static let win        = "Winner!"
     static let lose       = "3 In A Row"
     static let sound      = "Slots"
-//    static let imageArray = ["🍋", "❤️", "🍒", "🍌", "🍊", "🔔", "🍉", "👑"]
     static let imageArray = ["🍋", "❤️", "🍒", "⓻"]
     static let rattle     = "Rattle"
     static let homeToSlotVC = "showSlotVC"

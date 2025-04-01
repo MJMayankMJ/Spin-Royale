@@ -26,13 +26,12 @@ class DragonViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        // Register the EggCell nib.
         let nib = UINib(nibName: "EggCell", bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: "EggCell")
         
         collectionView.backgroundColor = .clear
         
-        // Initially, the button title is "Bet"
+        // initailly the button is ---- bet
         betButton.setTitle("Bet", for: .normal)
         
         setupNavigationCoinDisplay()
@@ -41,9 +40,9 @@ class DragonViewController: UIViewController {
     }
     
     deinit {
-            // remove observer when view controller is deallocated ....
-            NotificationCenter.default.removeObserver(self, name: CoinsManager.coinsDidChangeNotification, object: nil)
-        }
+        // remove observer when view controller is deallocated ....
+        NotificationCenter.default.removeObserver(self, name: CoinsManager.coinsDidChangeNotification, object: nil)
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -54,19 +53,17 @@ class DragonViewController: UIViewController {
         }
     }
     
-    // not needed .... but why not
+    // not needed .... but why not (lets be extra safe)
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // Update the coin label with current coin balance from the shared CoinsManager
         coinTotalLabel.text = "\(CoinsManager.shared.userStats?.totalCoins ?? 0)"
     }
-
+    
     
     // MARK: - IBActions
     @IBAction func betButtonTapped(_ sender: UIButton) {
-        // If the button title is "Bet", process a new wager.
         if sender.title(for: .normal) == "Bet" {
-            // Read the bet value.
             guard let betText = betTextField.text, let betValue = Int(betText) else {
                 print("Invalid bet")
                 return
@@ -79,7 +76,6 @@ class DragonViewController: UIViewController {
                 DispatchQueue.main.async {
                     switch result {
                     case .success():
-                        // Start the game by generating the board and highlighting the bottom row.
                         self.viewModel.startGame()
                         self.collectionView.reloadData()
                     case .failure(let error):
@@ -95,14 +91,13 @@ class DragonViewController: UIViewController {
         }
     }
     
-    /// Cash out the current game.
+    // Cash out the current game.
     func cashOutGame() {
         // Finalize current winnings.
         let bet = viewModel.betAmount
         let finalAmt = viewModel.finalAmount(forBet: bet)
         let netGain = viewModel.netGain(forBet: bet)
         
-        // Optionally, reveal the entire board.
         viewModel.revealEntireBoard()
         viewModel.gameOver = true
         
@@ -229,50 +224,6 @@ extension DragonViewController {
             self.navigationController?.popViewController(animated: true)
         }
         
-        //update coins if winnings exist, then reset game and continue.
-//        let replayAction = UIAlertAction(title: "Replay", style: .default) { _ in
-//            if self.viewModel.currentMultiplier > 1.0 {
-//                CoinsManager.shared.addCoins(amount: Int64(finalAmt)) { result in
-//                    DispatchQueue.main.async {
-//                        switch result {
-//                        case .success():
-//                            print("Winnings added successfully on replay.")
-//                        case .failure(let error):
-//                            let errorAlert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-//                            errorAlert.addAction(UIAlertAction(title: "OK", style: .default))
-//                            self.present(errorAlert, animated: true)
-//                        }
-//                        self.viewModel.resetGame()
-//                        self.betButton.setTitle("Bet", for: .normal)
-//                        self.collectionView.reloadData()
-//                    }
-//                }
-//            } else {
-//                self.viewModel.resetGame()
-//                self.betButton.setTitle("Bet", for: .normal)
-//                self.collectionView.reloadData()
-//            }
-//        }
-        // "Replay" action: deduct the bet amount again, then reset the game.
-//        let replayAction = UIAlertAction(title: "Replay", style: .default) { _ in
-//            CoinsManager.shared.deductCoins(amount: Int64(self.viewModel.betAmount)) { result in
-//                DispatchQueue.main.async {
-//                    switch result {
-//                    case .success():
-//                        print("Bet deducted for replay.")
-//                    case .failure(let error):
-//                        let errorAlert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-//                        errorAlert.addAction(UIAlertAction(title: "OK", style: .default))
-//                        self.present(errorAlert, animated: true)
-//                    }
-//                    // Reset the game state and update UI.
-//                    self.viewModel.resetGame()
-//                    self.betButton.setTitle("Bet", for: .normal)
-//                    self.collectionView.reloadData()
-//                }
-//            }
-//        }
-
         // "Replay" action: deduct the bet amount again and add winnings if applicable, then reset the game.
         let replayAction = UIAlertAction(title: "Replay", style: .default) { _ in
             let bet = self.viewModel.betAmount
@@ -299,7 +250,7 @@ extension DragonViewController {
                 self.deductBetForReplay(bet: bet)
             }
         }
-
+        
         
         alert.addAction(homeAction)
         alert.addAction(replayAction)
@@ -371,12 +322,12 @@ extension DragonViewController{
         let coinBarButtonItem = UIBarButtonItem(customView: container)
         navigationItem.rightBarButtonItem = coinBarButtonItem
     }
-
+    
     
     @objc func coinsDidChange() {
-            // Update the coin label whenever coins are changed.
-            coinTotalLabel.text = "\(CoinsManager.shared.userStats?.totalCoins ?? 0)"
-        }
+        // Update the coin label whenever coins are changed.
+        coinTotalLabel.text = "\(CoinsManager.shared.userStats?.totalCoins ?? 0)"
+    }
     
     //.... i know i could gave dome somthing better .... but im stupid
     private func deductBetForReplay(bet: Int) {
@@ -397,5 +348,5 @@ extension DragonViewController{
             }
         }
     }
-
+    
 }

@@ -14,13 +14,12 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var labelTotalSpins: UILabel!
     
     @IBOutlet weak var buttonCollectCoins: UIButton!
-//    @IBOutlet weak var buttonCollectSpins: UIButton!
     
     private var viewModel: HomeViewModel = HomeViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //KeychainHelper.shared.resetKeychain() //......
+        //KeychainHelper.shared.resetKeychain() //...... dont delete this comment
         
         // Set up a closure to update the UI when the view model changes.
         viewModel.onUpdate = { [weak self] in
@@ -46,27 +45,12 @@ class HomeViewController: UIViewController {
         print("\(viewModel.dailySpinsRemaining)")
         
         buttonCollectCoins.isEnabled = viewModel.canCollectCoins
-//        buttonCollectSpins.isEnabled = viewModel.canCollectSpins
     }
     
     @IBAction func didTapCollectCoins(_ sender: UIButton) {
         viewModel.collectCoins()
     }
     
-//    @IBAction func didTapCollectSpins(_ sender: UIButton) {
-//        viewModel.collectSpins()
-//    }
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == K.homeToSlotVC,
-//           let slotVC = segue.destination as? SlotViewController,
-//           let userStats = CoreDataManager.shared.fetchUserStats() {
-//            // Create a SlotViewModel and pass it to the SlotViewController.
-//            let slotVM = SlotViewModel(userStats: userStats)
-//            slotVC.viewModel = slotVM
-//            slotVC.presentationController?.delegate = self
-//        }
-//    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
            if segue.identifier == K.homeToSlotVC,
               let slotVC = segue.destination as? SlotViewController {

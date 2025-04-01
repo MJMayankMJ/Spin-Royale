@@ -32,7 +32,7 @@ class DragonViewModel {
     var gameOver: Bool = false
     
     // Multipliers: bottom row corresponds to index 0.
-    let multipliers: [Double] = [1.1, 1.3, 1.5, 1.7, 1.9, 2.1, 2.3, 2.5, 2.7]
+    let multipliers: [Double] = [1.1, 1.15, 1.2, 1.25, 1.3, 1.35, 1.4, 1.45, 1.5]
     
     init() {
         // Initialize the flat cells array with .normal state.
