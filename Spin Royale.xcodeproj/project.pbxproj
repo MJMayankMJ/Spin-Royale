@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		86EB0B612D9BC72A002166CD /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 86EB0B602D9BC72A002166CD /* IQKeyboardManagerSwift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		8666CF2D2D8AF25C003C6213 /* Spin Royale.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Spin Royale.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86EB0B612D9BC72A002166CD /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +83,7 @@
 			);
 			name = "Spin Royale";
 			packageProductDependencies = (
+				86EB0B602D9BC72A002166CD /* IQKeyboardManagerSwift */,
 			);
 			productName = "Spin Royale";
 			productReference = 8666CF2D2D8AF25C003C6213 /* Spin Royale.app */;
@@ -107,6 +113,9 @@
 			);
 			mainGroup = 8666CF242D8AF25C003C6213;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				86EB0B5F2D9BC72A002166CD /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 8666CF2E2D8AF25C003C6213 /* Products */;
 			projectDirPath = "";
@@ -335,6 +344,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		86EB0B5F2D9BC72A002166CD /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		86EB0B602D9BC72A002166CD /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 86EB0B5F2D9BC72A002166CD /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8666CF252D8AF25C003C6213 /* Project object */;
 }

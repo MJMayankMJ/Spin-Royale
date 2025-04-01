@@ -118,7 +118,7 @@
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7Yn-sK-Up7">
                                         <rect key="frame" x="0.0" y="0.0" width="210" height="34.333333333333336"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="azc-9b-dVz">
                                         <rect key="frame" x="310" y="0.0" width="50" height="34.333333333333336"/>
@@ -172,9 +172,9 @@
                                 <rect key="frame" x="0.0" y="0.0" width="440" height="956"/>
                             </imageView>
                             <visualEffectView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LaB-nj-plF" userLabel="V1">
-                                <rect key="frame" x="47.666666666666657" y="156" width="345" height="80"/>
+                                <rect key="frame" x="47.333333333333343" y="156" width="345.66666666666663" height="80.333333333333314"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="JOs-Lc-YSH" userLabel="VS View">
-                                    <rect key="frame" x="0.0" y="0.0" width="345" height="80"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="346" height="80"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="fct-aO-jIg">
@@ -190,7 +190,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wwC-oV-Y4b">
-                                                            <rect key="frame" x="25.000000000000007" y="36.666666666666657" width="102.33333333333334" height="33.666666666666657"/>
+                                                            <rect key="frame" x="24.999999999999993" y="36.666666666666657" width="102.33333333333331" height="33.666666666666657"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="33.5" id="oLC-ug-T7F"/>
                                                             </constraints>
@@ -214,7 +214,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QeW-Qi-fLf">
-                                                            <rect key="frame" x="24.999999999999993" y="36.666666666666657" width="93.333333333333314" height="33.666666666666657"/>
+                                                            <rect key="frame" x="25.000000000000021" y="36.666666666666657" width="93.333333333333314" height="33.666666666666657"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="33.5" id="3YZ-Fu-b6C"/>
                                                             </constraints>

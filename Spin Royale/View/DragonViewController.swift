@@ -37,6 +37,11 @@ class DragonViewController: UIViewController {
         setupNavigationCoinDisplay()
         // coin change
         NotificationCenter.default.addObserver(self, selector: #selector(coinsDidChange), name: CoinsManager.coinsDidChangeNotification, object: nil)
+        
+        // to dismiss keyboard -- well this cant be done cz than it would create touch issues with the game
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+//        view.addGestureRecognizer(tapGesture)
+        betTextField.addCancelButtonOnKeyboard()
     }
     
     deinit {
@@ -60,9 +65,13 @@ class DragonViewController: UIViewController {
         coinTotalLabel.text = "\(CoinsManager.shared.userStats?.totalCoins ?? 0)"
     }
     
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
     
     // MARK: - IBActions
     @IBAction func betButtonTapped(_ sender: UIButton) {
+        view.endEditing(true)
         if sender.title(for: .normal) == "Bet" {
             guard let betText = betTextField.text, let betValue = Int(betText) else {
                 print("Invalid bet")
@@ -349,4 +358,25 @@ extension DragonViewController{
         }
     }
     
+}
+
+//MARK: - For keyboard dismissing
+
+extension UITextField {
+    func addCancelButtonOnKeyboard() {
+        let doneToolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 44))
+        doneToolbar.barStyle = .default
+        
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let done: UIBarButtonItem = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(doneButtonAction))
+        
+        doneToolbar.items = [flexSpace, done]
+        doneToolbar.sizeToFit()
+        
+        self.inputAccessoryView = doneToolbar
+    }
+    
+    @objc func doneButtonAction() {
+        self.resignFirstResponder()
+    }
 }
