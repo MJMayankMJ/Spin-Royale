@@ -26,6 +26,9 @@ class HomeViewController: UIViewController, UIAdaptivePresentationControllerDele
 
         setupViewModel()
         setupTapGestures()
+        buttonSettings.isUserInteractionEnabled = true
+        let settingsTap = UITapGestureRecognizer(target: self, action: #selector(didTapSettings))
+        buttonSettings.addGestureRecognizer(settingsTap)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -108,20 +111,26 @@ class HomeViewController: UIViewController, UIAdaptivePresentationControllerDele
                            completion: { _ in completion() })
         })
     }
-
-    // MARK: - Settings
+    
     @objc private func didTapSettings() {
-        let sheet = UIAlertController(title: "Settings", message: nil, preferredStyle: .actionSheet)
-        sheet.addAction(UIAlertAction(title: "Mute Game Sound", style: .default) { _ in
-            // TODO: implement mute toggle
-        })
-        sheet.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        if let pop = sheet.popoverPresentationController {
-            pop.sourceView = buttonSettings
-            pop.sourceRect = buttonSettings.bounds
+        animateTap(on: buttonSettings) {
+            self.performSegue(withIdentifier: "toSettingVC", sender: nil)
         }
-        present(sheet, animated: true)
     }
+
+//    // MARK: - Settings
+//    @objc private func didTapSettings() {
+//        let sheet = UIAlertController(title: "Settings", message: nil, preferredStyle: .actionSheet)
+//        sheet.addAction(UIAlertAction(title: "Mute Game Sound", style: .default) { _ in
+//            // TODO: implement mute toggle
+//        })
+//        sheet.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+//        if let pop = sheet.popoverPresentationController {
+//            pop.sourceView = buttonSettings
+//            pop.sourceRect = buttonSettings.bounds
+//        }
+//        present(sheet, animated: true)
+//    }
 
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
