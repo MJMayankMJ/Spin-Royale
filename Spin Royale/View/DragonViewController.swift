@@ -9,12 +9,15 @@ import UIKit
 
 class DragonViewController: UIViewController {
     
-    var coinTotalLabel: UILabel!
+//    var coinTotalLabel: UILabel!
     
     // MARK: - IBOutlets
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var betTextField: UITextField!
     @IBOutlet weak var betButton: UIButton!
+    
+    @IBOutlet weak var coinTotalLabel: UILabel!
+    @IBOutlet weak var imageBackButton: UIImageView!
     
     // MARK: - ViewModel
     let viewModel = DragonViewModel()
@@ -34,14 +37,24 @@ class DragonViewController: UIViewController {
         // initailly the button is ---- bet
         betButton.setTitle("Bet", for: .normal)
         
-        setupNavigationCoinDisplay()
+        coinTotalLabel.text = "\(CoinsManager.shared.userStats?.totalCoins ?? 0)"
         // coin change
         NotificationCenter.default.addObserver(self, selector: #selector(coinsDidChange), name: CoinsManager.coinsDidChangeNotification, object: nil)
+        imageBackButton.isUserInteractionEnabled = true
+        let backTap = UITapGestureRecognizer(target: self, action: #selector(didTapBack))
+        imageBackButton.addGestureRecognizer(backTap)
         
         // to dismiss keyboard -- well this cant be done cz than it would create touch issues with the game
 //        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
 //        view.addGestureRecognizer(tapGesture)
         betTextField.addCancelButtonOnKeyboard()
+        
+        // slight blur
+        let blurEffect = UIBlurEffect(style: .light)                       // or .regular/.extraLight
+            let blurView   = UIVisualEffectView(effect: blurEffect)
+            blurView.frame = collectionView.bounds
+            blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            collectionView.backgroundView = blurView
     }
     
     deinit {
@@ -67,6 +80,22 @@ class DragonViewController: UIViewController {
     
     @objc func dismissKeyboard() {
         view.endEditing(true)
+    }
+    
+    @objc private func didTapBack() {
+        UIView.animate(withDuration: 0.08, animations: {
+            self.imageBackButton.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+        }, completion: { _ in
+            UIView.animate(withDuration: 0.08, animations: {
+                self.imageBackButton.transform = .identity
+            }, completion: { _ in
+                if let nav = self.navigationController {
+                    nav.popViewController(animated: true)
+                } else {
+                    self.dismiss(animated: true)
+                }
+            })
+        })
     }
     
     // MARK: - IBActions
@@ -305,33 +334,33 @@ extension DragonViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension DragonViewController{
-    func setupNavigationCoinDisplay() {
-        let containerWidth: CGFloat = 100
-        let containerHeight: CGFloat = 30
-        let container = UIView(frame: CGRect(x: 0, y: 0, width: containerWidth, height: containerHeight))
-        
-        let coinImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
-        
-        let symbolConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .regular, scale: .medium)
-        let symbolImage = UIImage(systemName: "circle.fill", withConfiguration: symbolConfig)
-        
-        coinImageView.image = symbolImage
-        coinImageView.tintColor = .systemYellow
-        coinImageView.contentMode = .scaleAspectFit
-        
-        container.addSubview(coinImageView)
-        
-        coinTotalLabel = UILabel(frame: CGRect(x: 30, y: 0, width: containerWidth - 30, height: containerHeight))
-        coinTotalLabel.text = "\(CoinsManager.shared.userStats?.totalCoins ?? 0)"
-        coinTotalLabel.font = UIFont.systemFont(ofSize: 16)
-        coinTotalLabel.textColor = .black
-        coinTotalLabel.textAlignment = .left
-        container.addSubview(coinTotalLabel)
-        
-        let coinBarButtonItem = UIBarButtonItem(customView: container)
-        navigationItem.rightBarButtonItem = coinBarButtonItem
-    }
-    
+//    func setupNavigationCoinDisplay() {
+//        let containerWidth: CGFloat = 100
+//        let containerHeight: CGFloat = 30
+//        let container = UIView(frame: CGRect(x: 0, y: 0, width: containerWidth, height: containerHeight))
+//        
+//        let coinImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
+//        
+//        let symbolConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .regular, scale: .medium)
+//        let symbolImage = UIImage(systemName: "circle.fill", withConfiguration: symbolConfig)
+//        
+//        coinImageView.image = symbolImage
+//        coinImageView.tintColor = .systemYellow
+//        coinImageView.contentMode = .scaleAspectFit
+//        
+//        container.addSubview(coinImageView)
+//        
+//        coinTotalLabel = UILabel(frame: CGRect(x: 30, y: 0, width: containerWidth - 30, height: containerHeight))
+//        coinTotalLabel.text = "\(CoinsManager.shared.userStats?.totalCoins ?? 0)"
+//        coinTotalLabel.font = UIFont.systemFont(ofSize: 16)
+//        coinTotalLabel.textColor = .black
+//        coinTotalLabel.textAlignment = .left
+//        container.addSubview(coinTotalLabel)
+//        
+//        let coinBarButtonItem = UIBarButtonItem(customView: container)
+//        navigationItem.rightBarButtonItem = coinBarButtonItem
+//    }
+//    
     
     @objc func coinsDidChange() {
         // Update the coin label whenever coins are changed.
