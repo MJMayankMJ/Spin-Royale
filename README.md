@@ -1,6 +1,12 @@
 # Spin Royale
 
 **Spin Royale** is an iOS casino experience built with UIKit and Core Data (also uses Key Chain for reward collection monitoring), featuring two engaging game modes: a classic slot machine and a thrilling Dragon game. Enjoy daily rewards, immersive animations, and realistic sound effects as you build up your coin balance and spin to win!
+<img width="953" alt="HomePage" src="https://github.com/user-attachments/assets/fdf6a0f5-0b04-4e89-b7d5-b6d3b54efd2e" />
+<img width="955" alt="SettingPage" src="https://github.com/user-attachments/assets/ade81d37-f7d9-4d81-a406-5436d2e0f1cd" />
+<img width="954" alt="SpinRoyale" src="https://github.com/user-attachments/assets/50517b83-a462-4237-9ae7-fc4e0bb8768f" />
+<img width="962" alt="DragonRoyale" src="https://github.com/user-attachments/assets/37fa1f12-6bce-418c-b204-cff158fa90d1" />
+<img width="957" alt="LimboROyale" src="https://github.com/user-attachments/assets/cd919a2b-a9b4-41a8-ba26-ceb756c5ca73" />
+<img width="956" alt="Reward" src="https://github.com/user-attachments/assets/d41d5218-d2f2-497e-8af4-6e8f66d43566" />
 
 ## Features
 
