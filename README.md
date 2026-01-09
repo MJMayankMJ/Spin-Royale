@@ -1,4 +1,4 @@
-# Spin Royale
+# Spin Royale (Note this project has been upgraded and now the poker game is added so further contributions are in private repo)
 
 **Spin Royale** is an iOS casino experience built with UIKit and Core Data (also uses Key Chain for reward collection monitoring), featuring two engaging game modes: a classic slot machine and a thrilling Dragon game. Enjoy daily rewards, immersive animations, and realistic sound effects as you build up your coin balance and spin to win!
 <img width="953" alt="HomePage" src="https://github.com/user-attachments/assets/fdf6a0f5-0b04-4e89-b7d5-b6d3b54efd2e" />
